@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../Desktop/perfume"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "LUMORA",
+		"liveServer.settings.port": 5501
+	}
+}
