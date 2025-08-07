@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login Page</title>
+        <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+        <link rel="stylesheet" href="login.css">
+        </head>
+    <body>
+        <form id="loginForm">
+            <h1 style="color: rgb(58, 58, 74);"><i>LOGIN</i></h1>
+            <div style="position: relative; display: flex; align-items: center; margin-bottom: 16px;">
+                <input type="text" id="username" name="username" placeholder="Username" style="padding: 5px 30px 5px 5px; border-radius: 5px; border: 1px solid #ccc; width: 100%;" required>
+                <img src="https://cdn-icons-png.flaticon.com/128/666/666201.png" alt="User Icon" style="position: absolute; right: 8px; width: 20px; height: 20px; opacity: 0.7; pointer-events: none;">
+            </div>
+            </br>
+            <div style="position: relative; display: flex; align-items: center;">
+                <input type="password" id="password" name="password" placeholder="Password" style="padding: 5px 30px 5px 5px; border-radius: 5px; border: 1px solid #ccc; width: 100%;" required>
+                <img src="https://cdn-icons-png.flaticon.com/128/709/709612.png" id="togglePassword" alt="Show Password" title="Show Password" style="position: absolute; right: 8px; width: 22px; height: 22px; cursor: pointer; opacity: 0.7;">
+            </div>
+            <br><br>
+            <button type="submit" style="color: rgb(15, 15, 17); background-color: #9786a3; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
+            </br>
+            <p>No Account Yet? <a href="sign.html"><u>Sign Up</u></a></p>
+        </form>
+
+        <script src="index.js" defer></script> <script>
+            // Dummy credentials
+            const validCredentials = {
+                username: "testuser",
+                password: "testpass123"
+            };
+
+            // Function to display custom message (defined in index.js, but included here for completeness if not linked)
+            // It's better practice to have this in index.js if it's a shared utility
+            // This local showMessage is now removed as index.js is linked.
+            /*
+            function showMessage(message, isSuccess = false) {
+                let messageBox = document.getElementById('messageBox');
+                if (!messageBox) {
+                    messageBox = document.createElement('div');
+                    messageBox.id = 'messageBox';
+                    document.body.appendChild(messageBox);
+                    messageBox.style.cssText = `
+                        display: none;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        padding: 15px 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                        z-index: 1000;
+                        text-align: center;
+                        color: white;
+                        font-family: Arial, sans-serif;
+                    `;
+                }
+
+                messageBox.textContent = message;
+                messageBox.style.backgroundColor = isSuccess ? '#4CAF50' : '#f44336';
+                messageBox.style.display = 'block';
+                setTimeout(() => {
+                    messageBox.style.display = 'none';
+                }, 3000);
+            }
+            */
+
+            // Prevent form default submission and check credentials
+            document.getElementById("loginForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const user = document.getElementById("username").value;
+                const pass = document.getElementById("password").value;
+
+                if (user === validCredentials.username && pass === validCredentials.password) {
+                    // Set a flag in sessionStorage upon successful login
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    // Use the globally available showMessage function from index.js
+                    if (typeof showMessage === 'function') {
+                        showMessage("Login successful! Redirecting...", true);
+                    } else {
+                        console.error("showMessage function not available.");
+                        // Fallback for immediate redirect if showMessage isn't loaded
+                        window.location.href = "main.html";
+                    }
+
+                    setTimeout(() => {
+                        window.location.href = "main.html";
+                    }, 1500); // Redirect after 1.5 seconds to show message
+                } else {
+                    if (typeof showMessage === 'function') {
+                        showMessage("Invalid username or password.");
+                    } else {
+                        console.error("showMessage function not available.");
+                        alert("Invalid username or password."); // Basic alert fallback
+                    }
+                }
+            });
+
+            // Password show/hide toggle
+            const togglePassword = document.getElementById('togglePassword');
+            const pwd = document.getElementById('password');
+            if (togglePassword && pwd) { // Added check to ensure elements exist
+                togglePassword.addEventListener('click', function() {
+                    if (pwd.type === 'password') {
+                        pwd.type = 'text';
+                        this.src = 'https://cdn-icons-png.flaticon.com/128/2767/2767146.png';
+                        this.title = 'Hide Password';
+                        this.alt = 'Hide Password';
+                        this.style.opacity = 1;
+                    } else {
+                        pwd.type = 'password';
+                        this.src = 'https://cdn-icons-png.flaticon.com/128/709/709612.png';
+                        this.title = 'Show Password';
+                        this.alt = 'Show Password';
+                        this.style.opacity = 0.7;
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>

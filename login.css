@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('perfume.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form {
+    width: 300px;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column; 
+    padding: 30px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 18px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    aspect-ratio: 1;
+    transition: transform 0.3s ease-in-out ;
+    transform-origin: center;
+    box-shadow: 5px 8px 32px 0 rgba(31, 38, 135, 0.18);
+    overflow: hidden;
+}
+        form:hover {
+            transform: scale(1.10);
+        }
+        h1 {
+            background: linear-gradient(90deg, #9786a3, #5a5c6a, #a7a8b2, #9786a3);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 2s linear infinite;
+            transition: transform 0.3s;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }

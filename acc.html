@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMORA - Profile</title>
+    <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Satisfy&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        xintegrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .profile-container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(30,30,30,0.12);
+            padding: 40px 36px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #343955;
+            background: #f2f4f7;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-info h2 {
+            font-size: 32px;
+            font-family: "Candal", sans-serif;
+            margin-bottom: 10px;
+            background: rgb(0, 0, 0);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: colorMove 1.2s linear infinite;
+            background-clip: text;
+        }
+        .profile-info p {
+            margin-bottom: 6px;
+            font-size: 18px;
+            color: #343955;
+        }
+        .profile-details {
+            margin-bottom: 30px;
+        }
+        .profile-details ul {
+            list-style: none;
+            padding: 0;
+        }
+        .profile-details ul li {
+            margin-bottom: 18px;
+            font-size: 16px;
+            color: #222;
+            display: flex;
+            align-items: center;
+        }
+        .profile-details ul li i {
+            margin-right: 10px;
+            color: #d71e06;
+            font-size: 18px;
+        }
+        .profile-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .profile-actions button {
+            background-color: #1d2321;
+            color: white;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .profile-actions button:hover {
+            background-color: #d57eca;
+            color: #1d2321;
+        }
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 18px 10px;
+            }
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            .profile-info h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar">
+        <h1 class="candal-regular logo-title">
+            <span class="perfume-icon">
+                <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" style="width: 32px; vertical-align: middle;">
+            </span>
+            LUMORA
+        </h1>
+        <div class="nav-links">
+            <p><a href="main.html#Home-us"><i>Home</i></a></p>
+            <p><a href="products.html"><i>Products</i></a></p>
+            <p><a href="main.html#about-us"><i>About us</i></a></p>
+            <p><a href="main.html#contact-us"><i>Contact us</i></a></p>
+        </div>
+        <div class="navbar-actions">
+            <a href="products.html" id="cart-icon-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:30px;height:30px;vertical-align:center;">
+            </a>
+            <!-- Existing buttons, now with IDs for easier manipulation -->
+            <a href="sign.html" id="signup-btn-link"><button class="nav-btn">Sign Up</button></a>
+            <a href="login.html" id="login-btn-link"><button class="nav-btn" >Login</button></a>
+            <!-- Profile button will be dynamically added here by JavaScript -->
+        </div>
+        <div class="navbar-menu-toggle">
+            <p onclick="shownav()"><i class="fa-solid fa-bars"></i></p>
+        </div>
+    </nav>
+    <!-- Profile Page Content -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User" class="profile-avatar" />
+            <div class="profile-info">
+                <h2>Jayaprakash Kumar</h2>
+                <p><i class="fa-solid fa-envelope"></i> jayaprakashkumar2006@email.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> Chennai, India</p>
+            </div>
+        </div>
+        <div class="profile-details">
+            <ul>
+                <li><i class="fa-solid fa-user"></i> Username: jayaprakashkumar2006</li>
+                <li><i class="fa-solid fa-phone"></i> Phone: +91-98765-43210</li>
+                <li><i class="fa-solid fa-calendar"></i> Member since: July 2024</li>
+                <li><i class="fa-solid fa-box"></i> Orders placed: 8</li>
+                <li><i class="fa-solid fa-star"></i> Loyalty Level: Gold</li>
+            </ul>
+        </div>
+        <div class="profile-actions">
+            <button onclick="location.href='orders.html'"><i class="fa-solid fa-box"></i> View Orders</button>
+            <button onclick="location.href='edit-profile.html'"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+            <button id="logoutButton"><i class="fa-solid fa-sign-out"></i> Logout</button>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="payment-icons">
+                <img src="https://cdn-icons-png.flaticon.com/128/349/349221.png" alt="Visa">
+                <img src="https://cdn-icons-png.flaticon.com/128/16174/16174534.png" alt="MasterCard">
+                <img src="https://cdn-icons-png.flaticon.com/128/174/174861.png" alt="PayPal">
+                <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="American Express">
+                <img src="https://cdn-icons-png.flaticon.com/128/14034/14034951.png" alt="Visa Electron">
+                <img src="https://cdn-icons-png.flaticon.com/128/217/217445.png" alt="Maestro">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 LUMORA. All rights reserved.</p>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutButton = document.getElementById('logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', function() {
+                    // Clear the login flag from sessionStorage
+                    sessionStorage.removeItem('isLoggedIn');
+                    // Redirect to the login page or home page
+                    window.location.href = 'login.html'; // Or 'main.html' if you want them to see the logged-out state
+                });
+            }
+
+            // Also update navbar elements on acc.html load for consistency
+            const signupBtnLink = document.getElementById('signup-btn-link');
+            const loginBtnLink = document.getElementById('login-btn-link');
+            const navbarActions = document.querySelector('.navbar-actions');
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+
+            if (isLoggedIn === 'true') {
+                if (signupBtnLink) signupBtnLink.style.display = 'none';
+                if (loginBtnLink) loginBtnLink.style.display = 'none';
+
+                let profileBtnLink = document.getElementById('profile-btn-link');
+                if (!profileBtnLink) {
+                    profileBtnLink = document.createElement('a');
+                    profileBtnLink.href = 'acc.html';
+                    profileBtnLink.id = 'profile-btn-link';
+                    profileBtnLink.innerHTML = `<button class="nav-btn"><i class="fa-solid fa-user"></i> Profile</button>`;
+                    navbarActions.appendChild(profileBtnLink);
+                }
+            } else {
+                if (signupBtnLink) signupBtnLink.style.display = 'block';
+                if (loginBtnLink) loginBtnLink.style.display = 'block';
+
+                let profileBtnLink = document.getElementById('profile-btn-link');
+                if (profileBtnLink) {
+                    profileBtnLink.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

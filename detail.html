@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMORA - Product Details</title>
+    <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Candal', sans-serif;
+            background-color: #f6f2f6;
+            margin: 0;
+            padding: 0;
+        }
+        /* Basic styling for the product detail page */
+        .product-detail-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #f6f2f6;
+            border-radius: 10px;
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .product-detail-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .product-detail-info {
+            text-align: center;
+        }
+        .product-detail-info h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .product-detail-info p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .product-detail-price {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 30px;
+        }
+        .product-detail-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .product-detail-actions .shop-btn {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .product-detail-actions .shop-btn:hover {
+            background-color: #45a049;
+        }
+        .back-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1 class="candal-regular logo-title">
+            <span class="perfume-icon">
+                <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" style="width: 32px; vertical-align: middle;">
+            </span> LUMORA
+        </h1>
+        <div class="nav-links">
+            <p><a href="main.html"><i>Home</i></a></p>
+            <p><a href="products.html"><i>Products</i></a></p>
+            <p><a href="main.html#about-us"><i>About Us</i></a></p>
+            <p><a href="main.html#contact-us"><i>Contact Us</i></a></p>
+        </div>
+        <div class="navbar-actions">
+            <a href="sign.html"><button class="nav-btn">Sign Up</button></a>
+            <a href="login.html"><button class="nav-btn" >Login</button></a>
+        </div>
+    </nav>
+
+    <div class="product-detail-container">
+        <img id="product-image" class="product-detail-image" src="" alt="Product Image">
+        <div class="product-detail-info">
+            <h2 id="product-name"></h2>
+            <p id="product-description">A captivating fragrance that embodies elegance and sophistication. Perfect for any occasion, leaving a lasting impression.</p>
+            <div class="product-detail-price" id="product-price"></div>
+            <div class="product-detail-actions">
+                <button class="shop-btn" id="add-to-cart-btn">Add to Cart →</button>
+            </div>
+        </div>
+        <a href="products.html" class="back-button">Back to Products</a>
+    </div>
+
+    <script>
+        const productsData = [
+    { id: 1, name: "Perfume 1", price: 1299, image: "karly-jones-4i9ef6xU738-unsplash.jpg", description: "Experience the freshness of citrus and sea salt, a perfect blend that invigorates your senses and refreshes your spirit." },
+    { id: 2, name: "Perfume 2", price: 1499, image: "birgith-roosipuu-nka_sIQpKEU-unsplash.jpg", description: "An elegant floral bouquet that captures the essence of blooming jasmine and delicate rose petals, perfect for romantic evenings." },
+    { id: 3, name: "Perfume 3", price: 1799, image: "yixian-zhao-q7iZCOXGOWY-unsplash.jpg", description: "A warm and spicy aroma that envelops you in a cozy embrace, ideal for evening wear and intimate gatherings." },
+    { id: 4, name: "Perfume 4", price: 1999, image: "delfina-iacub-nrkgRRskOBo-unsplash.jpg", description: "A sweet and playful fragrance with fruity undertones, perfect for those who love to express their vibrant personality." },
+    { id: 5, name: "Perfume 5", price: 2099, image: "filip-baotic-tgqnnQfq6C8-unsplash.jpg", description: "A sophisticated blend of woody notes and musk, exuding confidence and elegance for the modern individual." },
+    { id: 6, name: "Perfume 6", price: 2199, image: "laurissi-CVz2Ove_NuI-unsplash.jpg", description: "A light and airy scent reminiscent of a spring garden, bringing a sense of tranquility and freshness to your day." },
+    { id: 7, name: "Perfume 7", price: 2299, image: "pesce-huang-mq73cWf9ZAQ-unsplash.jpg", description: "An exotic fragrance with hints of amber and vanilla, perfect for those who dare to be different and embrace their uniqueness." },
+    { id: 8, name: "Perfume 8", price: 2399, image: "heidi-walley-m6sh2vS0Yjk-unsplash.jpg", description: "A bold and confident scent with a touch of leather, designed for the fearless and adventurous spirit." },
+    { id: 9, name: "Perfume 9", price: 2499, image: "pexels-valeriya-965990.jpg", description: "A delicate and powdery fragrance, perfect for daily use, leaving a subtle yet lasting impression." },
+    { id: 10, name: "Perfume 10", price: 2599, image: "p2-264870.jpg", description: "A vibrant and energetic scent with a burst of citrus, ideal for those who embrace life with enthusiasm." },
+    { id: 11, name: "Perfume 11", price: 2699, image: "3.jpg", description: "A mysterious and alluring fragrance with deep, rich notes, perfect for captivating attention." },
+    { id: 12, name: "Perfume 12", price: 2799, image: "p3-50725-325527.jpg", description: "A classic and timeless aroma, embodying pure elegance and sophistication for any occasion." },
+    { id: 13, name: "Perfume 13", price: 2899, image: "p13-6310591.jpg", description: "A modern and chic fragrance with a hint of spice, perfect for the contemporary individual." },
+    { id: 14, name: "Perfume 14", price: 2999, image: "p14bowska-8361484.jpg", description: "A refreshing and clean scent, perfect for a summer day, evoking feelings of joy and freedom." },
+    { id: 15, name: "Perfume 15", price: 3099, image: "p15-33109913.jpg", description: "A luxurious and opulent fragrance with a long-lasting trail, designed for those who appreciate the finer things in life." },
+    { id: 16, name: "Perfume 16", price: 3199, image: "8.jpg", description: "A captivating blend of sweet and woody notes, perfect for creating unforgettable memories." },
+    { id: 17, name: "Perfume 17", price: 3299, image: "9.jpg", description: "An invigorating and uplifting scent with green accords, ideal for energizing your spirit." },
+    { id: 18, name: "Perfume 18", price: 3399, image: "pe10-965730.jpg", description: "A sensual and warm fragrance, ideal for romantic evenings and intimate moments." },
+    { id: 19, name: "Perfume 19", price: 3499, image: "16b-o-phuc-34482444-11927264.jpg", description: "A unique and distinctive aroma with a touch of the unexpected, perfect for making a statement." },
+    { id: 20, name: "Perfume 20", price: 3599, image: "p208625543.jpg", description: "A powerful and memorable fragrance that leaves a statement, designed for those who dare to stand out." }
+];
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+
+            const product = productsData.find(p => p.id === productId);
+
+            if (product) {
+                document.getElementById("product-image").src = product.image;
+                document.getElementById("product-image").alt = product.name;
+                document.getElementById("product-name").textContent = product.name;
+                document.getElementById("product-description").textContent = product.description;
+                document.getElementById("product-price").textContent = `Price: $${product.price}`;
+
+                const addToCartBtn = document.getElementById("add-to-cart-btn");
+                addToCartBtn.addEventListener("click", () => {
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push({ name: product.name, price: product.price, image: product.image });
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    window.location.href = "cart.html";
+                });
+            } else {
+                // Handle case where product is not found
+                document.querySelector('.product-detail-container').innerHTML = `
+                    <p>Product not found.</p>
+                    <a href="products.html" class="back-button">Back to Products</a>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

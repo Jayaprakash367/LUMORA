@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        xintegrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .edit-profile-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(30,30,30,0.12);
+            padding: 40px 36px;
+        }
+        .edit-profile-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #343955;
+            font-family: "Candal", sans-serif;
+            background: linear-gradient(90deg, #d71e06, #ffb347, #1e90ff, #d71e06);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: colorMove 1.2s linear infinite;
+            background-clip: text;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #222;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .form-actions button {
+            background-color: #1d2321;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .form-actions button:hover {
+            background-color: #d57eca;
+            color: #1d2321;
+        }
+        .form-actions button.cancel {
+            background-color: #6c757d;
+        }
+        .form-actions button.cancel:hover {
+            background-color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar (can be included from main.html or simplified) -->
+    <nav class="navbar">
+        <h1 class="candal-regular logo-title">
+            <span class="perfume-icon">
+                <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" style="width: 32px; vertical-align: middle;">
+            </span>
+            LUMORA
+        </h1>
+        <div class="nav-links">
+            <p><a href="main.html#Home-us"><i>Home</i></a></p>
+            <p><a href="products.html"><i>Products</i></a></p>
+            <p><a href="main.html#about-us"><i>About us</i></a></p>
+            <p><a href="main.html#contact-us"><i>Contact us</i></a></p>
+        </div>
+        <div class="navbar-actions">
+            <a href="products.html" id="cart-icon-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:30px;height:30px;vertical-align:center;">
+            </a>
+            <!-- Existing buttons, now with IDs for easier manipulation -->
+            <a href="sign.html" id="signup-btn-link"><button class="nav-btn">Sign Up</button></a>
+            <a href="login.html" id="login-btn-link"><button class="nav-btn" >Login</button></a>
+            <!-- Profile button will be dynamically added here by JavaScript -->
+        </div>
+        <div class="navbar-menu-toggle">
+            <p onclick="shownav()"><i class="fa-solid fa-bars"></i></p>
+        </div>
+    </nav>
+
+    <div class="edit-profile-container">
+        <h2>Edit Profile</h2>
+        <form id="editProfileForm">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone">
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" id="location">
+            </div>
+            <div class="form-actions">
+                <button type="submit">Save Changes</button>
+                <button type="button" class="cancel" onclick="location.href='acc.html'">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="payment-icons">
+                <img src="https://cdn-icons-png.flaticon.com/128/349/349221.png" alt="Visa">
+                <img src="https://cdn-icons-png.flaticon.com/128/16174/16174534.png" alt="MasterCard">
+                <img src="https://cdn-icons-png.flaticon.com/128/174/174861.png" alt="PayPal">
+                <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="American Express">
+                <img src="https://cdn-icons-png.flaticon.com/128/14034/14034951.png" alt="Visa Electron">
+                <img src="https://cdn-icons-png.flaticon.com/128/217/217445.png" alt="Maestro">
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 LUMORA. All rights reserved.</p>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to display custom message (reusing the one from index.js/login.html)
+        function showMessage(message, isSuccess = false) {
+            let messageBox = document.getElementById('messageBox');
+            if (!messageBox) {
+                messageBox = document.createElement('div');
+                messageBox.id = 'messageBox';
+                document.body.appendChild(messageBox);
+                messageBox.style.cssText = `
+                    display: none;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    padding: 15px 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    z-index: 1000;
+                    text-align: center;
+                    color: white;
+                    font-family: Arial, sans-serif;
+                `;
+            }
+            messageBox.textContent = message;
+            messageBox.style.backgroundColor = isSuccess ? '#4CAF50' : '#f44336';
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const fullNameInput = document.getElementById('fullName');
+            const usernameInput = document.getElementById('username');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const locationInput = document.getElementById('location');
+            const editProfileForm = document.getElementById('editProfileForm');
+
+            // Load existing profile data from sessionStorage
+            const savedProfile = JSON.parse(sessionStorage.getItem('userProfile')) || {
+                fullName: 'Jayaprakash Kumar',
+                username: 'jayaprakashkumar2006',
+                email: 'jayaprakashkumar2006@email.com',
+                phone: '+91-98765-43210',
+                location: 'Chennai, India'
+            };
+
+            fullNameInput.value = savedProfile.fullName;
+            usernameInput.value = savedProfile.username;
+            emailInput.value = savedProfile.email;
+            phoneInput.value = savedProfile.phone;
+            locationInput.value = savedProfile.location;
+
+            if (editProfileForm) {
+                editProfileForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    // Get updated values from the form
+                    const updatedProfile = {
+                        fullName: fullNameInput.value,
+                        username: usernameInput.value,
+                        email: emailInput.value,
+                        phone: phoneInput.value,
+                        location: locationInput.value
+                    };
+
+                    // Save updated profile data to sessionStorage
+                    sessionStorage.setItem('userProfile', JSON.stringify(updatedProfile));
+
+                    showMessage('Profile updated successfully!', true);
+                    setTimeout(() => {
+                        window.location.href = 'acc.html'; // Redirect back to profile page
+                    }, 1500);
+                });
+            }
+
+            // Navbar logic for edit-profile.html (same as acc.html and main.html)
+            const signupBtnLink = document.getElementById('signup-btn-link');
+            const loginBtnLink = document.getElementById('login-btn-link');
+            const navbarActions = document.querySelector('.navbar-actions');
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+
+            if (isLoggedIn === 'true') {
+                if (signupBtnLink) signupBtnLink.style.display = 'none';
+                if (loginBtnLink) loginBtnLink.style.display = 'none';
+
+                let profileBtnLink = document.getElementById('profile-btn-link');
+                if (!profileBtnLink) {
+                    profileBtnLink = document.createElement('a');
+                    profileBtnLink.href = 'acc.html';
+                    profileBtnLink.id = 'profile-btn-link';
+                    profileBtnLink.innerHTML = `<button class="nav-btn"><i class="fa-solid fa-user"></i> Profile</button>`;
+                    navbarActions.appendChild(profileBtnLink);
+                }
+            } else {
+                if (signupBtnLink) signupBtnLink.style.display = 'block';
+                if (loginBtnLink) loginBtnLink.style.display = 'block';
+
+                let profileBtnLink = document.getElementById('profile-btn-link');
+                if (profileBtnLink) {
+                    profileBtnLink.remove();
+                }
+            }
+        });
+
+        // Global functions for side navbar (if index.js is not loaded here)
+        function shownav() {
+            document.querySelector('.side-navbar').style.left = '0';
+        }
+
+        function closenav() {
+            document.querySelector('.side-navbar').style.left = '-40%';
+        }
+    </script>
+</body>
+</html>

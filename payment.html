@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: "Poppins", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .payment-container {
+            max-width: 600px;
+            background-color: #fdf6e3;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .payment-container h1 {
+            color: #232946;
+            margin-bottom: 30px;
+        }
+
+        /* Payment method selection tabs */
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            gap: 15px;
+            flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+        }
+
+        .payment-method-tab {
+            padding: 12px 25px;
+            border: 2px solid #1d2321;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #1d2321;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            white-space: nowrap; /* Prevent text from wrapping inside tab */
+        }
+
+        .payment-method-tab.active {
+            background-color: #1d2321;
+            color: white;
+        }
+
+        .payment-method-tab:hover:not(.active) {
+            background-color: #e0e0e0;
+        }
+
+        /* Form styling */
+        .payment-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            text-align: left;
+        }
+
+        .payment-form input[type="text"],
+        .payment-form input[type="email"],
+        .payment-form input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .pay-now-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .pay-now-btn:hover {
+            background-color: #218838;
+        }
+
+        /* Online payment specific styles */
+        .online-payment-options {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px dashed #ccc;
+            border-radius: 10px;
+            background-color: #fffef8;
+        }
+
+        .online-payment-options p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .online-payment-options .pay-now-btn {
+            background-color: #007bff; /* Different color for online pay */
+            margin: 5px; /* Add some margin between buttons */
+        }
+
+        .online-payment-options .pay-now-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Cash on Delivery specific styles */
+        .cod-options {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px dashed #ccc;
+            border-radius: 10px;
+            background-color: #fffef8;
+        }
+
+        .cod-options p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .cod-options .confirm-cod-btn {
+            background-color: #ffc107; /* Yellowish color for COD */
+            color: #333;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cod-options .confirm-cod-btn:hover {
+            background-color: #e0a800;
+        }
+
+
+        .success-message {
+            display: none; /* Hidden by default */
+            margin-top: 30px;
+        }
+
+        .success-message h2 {
+            color: #232946;
+            margin-bottom: 20px;
+        }
+
+        .success-message p {
+            font-size: 20px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .back-button {
+            background-color: #1d2321;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #232946;
+        }
+
+        .back-to-shop-btn {
+            background-color: #1d2321;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 30px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-shop-btn:hover {
+            background-color: #232946;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="payment-container" id="payment-view">
+        <div id="payment-section">
+            <h1>Choose Payment Method</h1>
+
+            <div class="payment-methods">
+                <div class="payment-method-tab active" data-method="card">Card Payment</div>
+                <div class="payment-method-tab" data-method="online">Online Payment</div>
+                <div class="payment-method-tab" data-method="cod">Cash on Delivery</div>
+            </div>
+
+            <div id="card-payment-form">
+                <form class="payment-form">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
+
+                    <label for="card-name">Name on Card:</label>
+                    <input type="text" id="card-name" placeholder="Full Name" required>
+
+                    <label for="expiry-date">Expiry Date (MM/YY):</label>
+                    <input type="text" id="expiry-date" placeholder="MM/YY" required>
+
+                    <label for="cvv">CVV:</label>
+                    <input type="number" id="cvv" placeholder="XXX" required>
+
+                    <button type="button" class="pay-now-btn" id="pay-with-card-btn">Pay with Card</button>
+                    <button type="button" class="pay-now-btn" onclick="location.href='cart.html'">Cancel</button>
+                </form>
+            </div>
+
+            <div id="online-payment-options" style="display: none;">
+                <div class="online-payment-options">
+                    <p>Select your preferred online payment method:</p>
+                    <button type="button" class="pay-now-btn" id="pay-with-gpay-btn">Pay with Google Pay</button>
+                    <button type="button" class="pay-now-btn" id="pay-with-phonepe-btn">Pay with PhonePe</button>
+                    <button type="button" class="pay-now-btn" id="pay-with-other-online-btn">Other Online Payment</button>
+                    <p style="font-size: 14px; margin-top: 15px; color: #888;">(This is a simulation. Actual payment integration requires API setup.)</p>
+                    <button type="button" class="pay-now-btn" onclick="location.href='cart.html'" style="background-color: #218838;">Cancel</button>
+                </div>
+            </div>
+
+            <div id="cod-options" style="display: none;">
+                <div class="cod-options">
+                    <p>You have chosen Cash on Delivery.</p>
+                    <p>Please ensure you have the exact amount ready at the time of delivery.</p>
+                    <button type="button" class="confirm-cod-btn" id="confirm-cod-btn">Confirm Order with COD</button>
+                    <button type="button" class="pay-now-btn" onclick="location.href='cart.html'" style="background-color: #218838;">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="success-message" id="success-message">
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for your purchase.</p>
+            <a href="main.html" class="back-to-shop-btn">Continue Shopping</a>
+        </div>
+    </div>
+
+    <script>
+        const cardTab = document.querySelector('[data-method="card"]');
+        const onlineTab = document.querySelector('[data-method="online"]');
+        const codTab = document.querySelector('[data-method="cod"]'); // New COD tab
+        
+        const cardPaymentForm = document.getElementById("card-payment-form");
+        const onlinePaymentOptions = document.getElementById("online-payment-options");
+        const codOptions = document.getElementById("cod-options"); // New COD section
+
+        const payWithCardBtn = document.getElementById("pay-with-card-btn");
+        const payWithGPayBtn = document.getElementById("pay-with-gpay-btn");
+        const payWithPhonePeBtn = document.getElementById("pay-with-phonepe-btn");
+        const payWithOtherOnlineBtn = document.getElementById("pay-with-other-online-btn");
+        const confirmCodBtn = document.getElementById("confirm-cod-btn"); // New COD button
+
+        const paymentSection = document.getElementById("payment-section");
+        const successMessage = document.getElementById("success-message");
+
+        // Function to handle payment/order success
+        function handleOrderSuccess() {
+            localStorage.removeItem("cart"); // Clear the cart
+            paymentSection.style.display = "none"; // Hide payment section
+            successMessage.style.display = "block"; // Show success message
+            // Update success message text for COD
+            if (document.querySelector('.payment-method-tab.active').dataset.method === 'cod') {
+                successMessage.querySelector('h2').textContent = "Order Confirmed (Cash on Delivery)!";
+                successMessage.querySelector('p').textContent = "Your order has been placed and will be delivered soon. Please keep the cash ready.";
+            } else {
+                successMessage.querySelector('h2').textContent = "Payment Successful!";
+                successMessage.querySelector('p').textContent = "Thank you for your purchase.";
+            }
+        }
+
+        // Function to switch payment method views
+        function showPaymentMethod(method) {
+            // Deactivate all tabs
+            document.querySelectorAll('.payment-method-tab').forEach(tab => tab.classList.remove('active'));
+            // Hide all content sections
+            cardPaymentForm.style.display = "none";
+            onlinePaymentOptions.style.display = "none";
+            codOptions.style.display = "none";
+
+            // Activate selected tab and show corresponding content
+            if (method === 'card') {
+                cardTab.classList.add('active');
+                cardPaymentForm.style.display = "block";
+            } else if (method === 'online') {
+                onlineTab.classList.add('active');
+                onlinePaymentOptions.style.display = "block";
+            } else if (method === 'cod') {
+                codTab.classList.add('active');
+                codOptions.style.display = "block";
+            }
+        }
+
+        // Initial display (default to card payment)
+        showPaymentMethod('card');
+
+        // Event listeners for payment method tabs
+        cardTab.addEventListener("click", () => showPaymentMethod('card'));
+        onlineTab.addEventListener("click", () => showPaymentMethod('online'));
+        codTab.addEventListener("click", () => showPaymentMethod('cod')); // New event listener for COD tab
+
+        // Event listener for "Pay with Card" button
+        payWithCardBtn.addEventListener("click", () => {
+            // Basic validation (you'd add more robust validation here)
+            const cardNumber = document.getElementById("card-number").value;
+            const cardName = document.getElementById("card-name").value;
+            const expiryDate = document.getElementById("expiry-date").value;
+            const cvv = document.getElementById("cvv").value;
+
+            if (cardNumber && cardName && expiryDate && cvv) {
+                alert("Processing card payment..."); // Simulate processing
+                handleOrderSuccess();
+            } else {
+                alert("Please fill in all card details.");
+            }
+        });
+
+        // Event listeners for online payment buttons (simulated)
+        payWithGPayBtn.addEventListener("click", () => {
+            alert("Redirecting to Google Pay..."); // Simulate redirect
+            handleOrderSuccess();
+        });
+
+        payWithPhonePeBtn.addEventListener("click", () => {
+            alert("Redirecting to PhonePe..."); // Simulate redirect
+            handleOrderSuccess();
+        });
+
+        payWithOtherOnlineBtn.addEventListener("click", () => {
+            alert("Redirecting to generic online payment gateway..."); // Simulate redirect
+            handleOrderSuccess();
+        });
+
+        // Event listener for "Confirm Order with COD" button
+        confirmCodBtn.addEventListener("click", () => {
+            alert("Confirming Cash on Delivery order..."); // Simulate confirmation
+            handleOrderSuccess();
+        });
+    </script>
+</body>
+
+</html>

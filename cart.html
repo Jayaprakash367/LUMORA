@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+     <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .cart-container {
+            max-width: 900px;
+            margin: 60px auto;
+            background-color: #fdf6e3;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 20px;
+            animation: fadeIn 0.6s ease-in-out;
+            position: relative; /* Added for positioning the back button */
+        }
+
+        .cart-container h1 {
+            text-align: center;
+            color: #232946;
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #fffef8;
+            border-radius: 12px;
+            box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .cart-item:hover {
+            transform: scale(1.02);
+        }
+
+        .cart-item img {
+            width: 150px;
+            border-radius: 10px;
+        }
+
+        .cart-details {
+            flex: 1;
+        }
+
+        .cart-details h2 {
+            margin-bottom: 10px;
+            color: #1d2321;
+        }
+
+        .cart-details p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .checkout-btn {
+            background-color: #1d2321;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 40px auto 0 auto;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #232946;
+        }
+
+        .similar-products {
+            padding: 40px 20px;
+            margin-top: 60px;
+            background-color: #fff0e0;
+        }
+
+        .similar-products h2 {
+            text-align: center;
+            color: #232946;
+            margin-bottom: 30px;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 20px;
+        }
+
+        .slider-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .slider-wrapper::-webkit-scrollbar-thumb {
+            background: #232946;
+            border-radius: 4px;
+        }
+
+        .slider-card {
+            flex: 0 0 auto;
+            width: 220px;
+            scroll-snap-align: start;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .slider-card:hover {
+            transform: scale(1.05);
+        }
+
+        .slider-card img {
+            width: 100%;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .slider-card a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #1d2321;
+            text-decoration: none;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-box {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 30px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-section {
+            flex: 1 1 250px;
+            margin: 20px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-section form {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .footer-section input[type="email"] {
+            padding: 10px;
+            width: 70%;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .footer-section button {
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .social-icons a {
+            color: #fff;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .footer-brand {
+            text-align: center;
+            background-color: #111;
+            color: #fff;
+            padding: 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-button-container { /* New container for back button */
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-button {
+            background-color: #1d2321;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 14px;
+            display: inline-flex; /* To align arrow and text */
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #232946;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cart-container">
+        <div class="back-button-container">
+            <a href="main.html" class="back-button">← Back</a>
+        </div>
+        <h1>Your Cart</h1>
+        <div id="cart-items">
+            </div>
+        <button class="checkout-btn" onclick="location.href='payment.html'">Proceed to Checkout</button>
+    </div>
+
+    <div class="similar-products">
+        <h2>Similar Products</h2>
+        <div class="slider-wrapper">
+            <div class="slider-card">
+                <img src="karly-jones-4i9ef6xU738-unsplash.jpg" alt="Perfume 1">
+                <a href="products.html">Shop Now →</a>
+            </div>
+            <div class="slider-card">
+                <img src="birgith-roosipuu-nka_sIQpKEU-unsplash.jpg" alt="Perfume 2">
+                <a href="products.html">Shop Now →</a>
+            </div>
+            <div class="slider-card">
+                <img src="filip-baotic-tgqnnQfq6C8-unsplash.jpg" alt="Perfume 3">
+                <a href="products.html">Shop Now →</a>
+            </div>
+            <div class="slider-card">
+                <img src="pesce-huang-mq73cWf9ZAQ-unsplash.jpg" alt="Perfume 4">
+                <a href="products.html">Shop Now →</a>
+            </div>
+            <div class="slider-card">
+                <img src="heidi-walley-m6sh2vS0Yjk-unsplash.jpg" alt="Perfume 5">
+                <a href="products.html">Shop Now →</a>
+            </div>
+            <div class="slider-card">
+                <img src="laurissi-CVz2Ove_NuI-unsplash.jpg" alt="Perfume 6">
+                <a href="products.html">Shop Now →</a>
+            </div>
+            <div class="slider-card">
+                <img src="delfina-iacub-nrkgRRskOBo-unsplash.jpg" alt="Perfume 7">
+                <a href="products.html">Shop Now →</a>
+            </div>
+            <div class="slider-card">
+                <img src="yixian-zhao-q7iZCOXGOWY-unsplash.jpg" alt="Perfume 8">
+                <a href="products.html">Shop Now →</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-box">
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Terms & Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Subscribe</h4>
+                <p>Enter your email below to be the first to know about new collections and product launches.</p>
+                <form>
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit">→</button>
+                </form>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Orders and Shipping</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Delivery & Returns Policy</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Track My Order</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-brand">
+            <p>LUMORA</p>
+        </div>
+    </footer>
+
+    <script>
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartContainer = document.getElementById("cart-items");
+
+        if (cartItems.length === 0) {
+            cartContainer.innerHTML = "<p style='text-align:center;'>Your cart is empty.</p>";
+        } else {
+            cartItems.forEach(item => {
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("cart-item");
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-details">
+                        <h2>${item.name}</h2>
+                        <p>Price: $${item.price}</p>
+                    </div>
+                `;
+                cartContainer.appendChild(itemDiv);
+            });
+        }
+  let total = 0;
+
+  if (cartItems.length === 0) {
+    cartContainer.innerHTML = "<p style='text-align:center;'>Your cart is empty.</p>";
+  } else {
+    cartItems.forEach(item => {
+      total += item.price;
+      const itemDiv = document.createElement("div");
+      itemDiv.classList.add("cart-item");
+      itemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-details">
+          <h2>${item.name}</h2>
+          <p>Price: ₹${item.price}</p>
+        </div>
+      `;
+      cartContainer.appendChild(itemDiv);
+    });
+
+    const totalDiv = document.createElement("div");
+    totalDiv.style.textAlign = "center";
+    totalDiv.style.fontSize = "18px";
+    totalDiv.style.marginTop = "20px";
+    totalDiv.innerHTML = `<strong>Total: ₹${total}</strong>`;
+    cartContainer.appendChild(totalDiv);
+  }
+
+  function renderCart() {
+    cartContainer.innerHTML = "";
+    let total = 0;
+
+    if (cartItems.length === 0) {
+      cartContainer.innerHTML = "<p style='text-align:center;'>Your cart is empty.</p>";
+      return;
+    }
+
+    cartItems.forEach((item, index) => {
+      total += item.price;
+
+      const itemDiv = document.createElement("div");
+      itemDiv.classList.add("cart-item");
+      itemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <div class="cart-details">
+          <h2>${item.name}</h2>
+          <p>Price: ₹${item.price}</p>
+          <button class="remove-btn" data-index="${index}" style="
+            margin-top:10px;
+            background-color: #ff5c5c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+          ">Remove</button>
+        </div>
+      `;
+      cartContainer.appendChild(itemDiv);
+    });
+
+    const totalDiv = document.createElement("div");
+    totalDiv.style.textAlign = "center";
+    totalDiv.style.fontSize = "18px";
+    totalDiv.style.marginTop = "20px";
+    totalDiv.innerHTML = `<strong>Total: ₹${total}</strong>`;
+    cartContainer.appendChild(totalDiv);
+
+    setupRemoveButtons();
+  }
+
+  function setupRemoveButtons() {
+    const removeButtons = document.querySelectorAll(".remove-btn");
+    removeButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const index = parseInt(button.getAttribute("data-index"));
+        cartItems.splice(index, 1); // Remove item from array
+        localStorage.setItem("cart", JSON.stringify(cartItems)); // Update localStorage
+        renderCart(); // Re-render cart
+      });
+    });
+  }
+
+  // Initial render
+  renderCart();
+
+</script>
+
+</body>
+
+</html>
