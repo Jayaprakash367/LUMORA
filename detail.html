@@ -6,92 +6,406 @@
     <title>LUMORA - Product Details</title>
     <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Candal', sans-serif;
-            background-color: #f6f2f6;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        /* Basic styling for the product detail page */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .product-detail-wrapper {
+            max-width: 1200px;
+            margin: 80px auto 40px;
+            padding: 0 20px;
+        }
+
         .product-detail-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px;
-            max-width: 900px;
-            margin: 50px auto;
-            background-color: #f6f2f6;
-            border-radius: 10px;
-            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.6s ease-out;
         }
-        .product-detail-image {
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-image-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image-wrapper {
+            position: relative;
             width: 100%;
             max-width: 400px;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 30px;
+            aspect-ratio: 3/4;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(215, 30, 6, 0.2);
+            transition: all 0.4s ease;
         }
-        .product-detail-info {
-            text-align: center;
+
+        .product-image-wrapper:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px rgba(215, 30, 6, 0.3);
         }
-        .product-detail-info h2 {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #333;
+
+        .product-detail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
-        .product-detail-info p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            color: #666;
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(215, 30, 6, 0.3);
+        }
+
+        .product-info-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 20px;
         }
-        .product-detail-price {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #e74c3c;
-            margin-bottom: 30px;
+
+        .stars {
+            color: #ffc107;
+            font-size: 1.2rem;
         }
+
+        .rating-text {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .product-detail-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #1d2321;
+            font-weight: 700;
+        }
+
+        .product-category {
+            font-size: 0.95rem;
+            color: #d71e06;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-detail-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .original-price {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 20px;
+        }
+
+        .product-detail-info > p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .product-specs {
+            margin-bottom: 40px;
+        }
+
+        .specs-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1d2321;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .spec-item {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid #d71e06;
+            transition: all 0.3s ease;
+        }
+
+        .spec-item:hover {
+            background: #fff5f1;
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(215, 30, 6, 0.1);
+        }
+
+        .spec-label {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-value {
+            font-size: 1.1rem;
+            color: #1d2321;
+            font-weight: 600;
+        }
+
+        .highlights {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(215, 30, 6, 0.05), rgba(255, 179, 71, 0.05));
+            border-radius: 12px;
+            border: 2px solid rgba(215, 30, 6, 0.1);
+        }
+
+        .highlights-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1d2321;
+            margin-bottom: 15px;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .highlight-item i {
+            color: #d71e06;
+            font-size: 1.2rem;
+        }
+
         .product-detail-actions {
             display: flex;
-            gap: 20px;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .shop-btn {
+            flex: 1;
+            padding: 16px 30px;
+            font-size: 1.05rem;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 20px rgba(215, 30, 6, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .shop-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(215, 30, 6, 0.4);
+        }
+
+        .shop-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .wishlist-btn {
+            padding: 16px 30px;
+            font-size: 1.2rem;
+            background: white;
+            color: #d71e06;
+            border: 2px solid #d71e06;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
-        .product-detail-actions .shop-btn {
-            padding: 12px 25px;
-            font-size: 1.1em;
-            background-color: #4CAF50;
+
+        .wishlist-btn:hover {
+            background: #d71e06;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            transform: scale(1.05);
         }
-        .product-detail-actions .shop-btn:hover {
-            background-color: #45a049;
-        }
+
         .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+            padding: 12px 25px;
+            background-color: #f0f0f0;
+            color: #1d2321;
             border: none;
-            border-radius: 5px;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
+
         .back-button:hover {
-            background-color: #0056b3;
+            background-color: #1d2321;
+            color: white;
+            transform: translateX(-5px);
         }
-        
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-selector label {
+            font-weight: 600;
+            color: #1d2321;
+        }
+
+        .quantity-selector input {
+            width: 70px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .delivery-info {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .delivery-item {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .delivery-item i {
+            font-size: 1.5rem;
+            color: #d71e06;
+        }
+
+        .delivery-text {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .delivery-text strong {
+            display: block;
+            color: #1d2321;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .product-detail-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px 20px;
+            }
+
+            .product-detail-info h1 {
+                font-size: 2rem;
+            }
+
+            .product-detail-price {
+                font-size: 1.8rem;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-detail-actions {
+                flex-direction: column;
+            }
+
+            .shop-btn {
+                width: 100%;
+            }
+
+            .wishlist-btn {
+                width: 100%;
+            }
+
+            .delivery-info {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <h1 class="candal-regular logo-title">
             <span class="perfume-icon">
-                <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" style="width: 32px; vertical-align: middle;">
+                <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" class="navbar-icon">
             </span> LUMORA
         </h1>
         <div class="nav-links">
@@ -106,42 +420,405 @@
         </div>
     </nav>
 
-    <div class="product-detail-container">
-        <img id="product-image" class="product-detail-image" src="" alt="Product Image">
-        <div class="product-detail-info">
-            <h2 id="product-name"></h2>
-            <p id="product-description">A captivating fragrance that embodies elegance and sophistication. Perfect for any occasion, leaving a lasting impression.</p>
-            <div class="product-detail-price" id="product-price"></div>
-            <div class="product-detail-actions">
-                <button class="shop-btn" id="add-to-cart-btn">Add to Cart →</button>
+    <div class="product-detail-wrapper">
+        <div class="product-detail-container">
+            <!-- Image Section -->
+            <div class="product-image-section">
+                <div class="product-image-wrapper">
+                    <img id="product-image" class="product-detail-image" src="" alt="Product Image">
+                    <div class="product-badge" id="product-badge">Premium</div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="product-info-section">
+                <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text" id="rating">(250+ Reviews)</span>
+                </div>
+
+                <p class="product-category" id="product-category">Premium Fragrance</p>
+                <h1 id="product-name"></h1>
+
+                <div class="product-detail-price" id="product-price"></div>
+                <div class="original-price" id="original-price"></div>
+
+                <p id="product-description"></p>
+
+                <!-- Highlights -->
+                <div class="highlights">
+                    <div class="highlights-title">Why Choose This Perfume?</div>
+                    <div class="highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Long-lasting fragrance (8-12 hours)</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Premium quality ingredients</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Suitable for any occasion</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Elegant packaging</span>
+                    </div>
+                </div>
+
+                <!-- Specifications -->
+                <div class="product-specs">
+                    <div class="specs-title">
+                        <i class="fas fa-vial"></i> Product Specifications
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-label">Volume</div>
+                            <div class="spec-value">100 ML</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Type</div>
+                            <div class="spec-value">Eau de Parfum</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Longevity</div>
+                            <div class="spec-value">8-12 Hours</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Bottle Type</div>
+                            <div class="spec-value">Glass with Atomizer</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Top Notes</div>
+                            <div class="spec-value" id="top-notes">Citrus, Bergamot</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Heart Notes</div>
+                            <div class="spec-value" id="heart-notes">Floral, Rose</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Base Notes</div>
+                            <div class="spec-value" id="base-notes">Musk, Sandalwood</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Perfect For</div>
+                            <div class="spec-value" id="perfect-for">All Seasons</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Info -->
+                <div class="delivery-info">
+                    <div class="delivery-item">
+                        <i class="fas fa-truck"></i>
+                        <div class="delivery-text">
+                            <strong>Free Delivery</strong>
+                            On orders above ₹500
+                        </div>
+                    </div>
+                    <div class="delivery-item">
+                        <i class="fas fa-undo"></i>
+                        <div class="delivery-text">
+                            <strong>Easy Returns</strong>
+                            30-day money back guarantee
+                        </div>
+                    </div>
+                    <div class="delivery-item">
+                        <i class="fas fa-lock"></i>
+                        <div class="delivery-text">
+                            <strong>Secure Payment</strong>
+                            100% secure transactions
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quantity Selector -->
+                <div class="quantity-selector">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" min="1" max="10" value="1">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="product-detail-actions">
+                    <button class="shop-btn" id="add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="wishlist-btn" id="add-to-wishlist-btn" title="Add to Wishlist">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+
+                <a href="products.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Products
+                </a>
             </div>
         </div>
-        <a href="products.html" class="back-button">Back to Products</a>
     </div>
 
     <script>
         const productsData = [
-    { id: 1, name: "Perfume 1", price: 1299, image: "karly-jones-4i9ef6xU738-unsplash.jpg", description: "Experience the freshness of citrus and sea salt, a perfect blend that invigorates your senses and refreshes your spirit." },
-    { id: 2, name: "Perfume 2", price: 1499, image: "birgith-roosipuu-nka_sIQpKEU-unsplash.jpg", description: "An elegant floral bouquet that captures the essence of blooming jasmine and delicate rose petals, perfect for romantic evenings." },
-    { id: 3, name: "Perfume 3", price: 1799, image: "yixian-zhao-q7iZCOXGOWY-unsplash.jpg", description: "A warm and spicy aroma that envelops you in a cozy embrace, ideal for evening wear and intimate gatherings." },
-    { id: 4, name: "Perfume 4", price: 1999, image: "delfina-iacub-nrkgRRskOBo-unsplash.jpg", description: "A sweet and playful fragrance with fruity undertones, perfect for those who love to express their vibrant personality." },
-    { id: 5, name: "Perfume 5", price: 2099, image: "filip-baotic-tgqnnQfq6C8-unsplash.jpg", description: "A sophisticated blend of woody notes and musk, exuding confidence and elegance for the modern individual." },
-    { id: 6, name: "Perfume 6", price: 2199, image: "laurissi-CVz2Ove_NuI-unsplash.jpg", description: "A light and airy scent reminiscent of a spring garden, bringing a sense of tranquility and freshness to your day." },
-    { id: 7, name: "Perfume 7", price: 2299, image: "pesce-huang-mq73cWf9ZAQ-unsplash.jpg", description: "An exotic fragrance with hints of amber and vanilla, perfect for those who dare to be different and embrace their uniqueness." },
-    { id: 8, name: "Perfume 8", price: 2399, image: "heidi-walley-m6sh2vS0Yjk-unsplash.jpg", description: "A bold and confident scent with a touch of leather, designed for the fearless and adventurous spirit." },
-    { id: 9, name: "Perfume 9", price: 2499, image: "pexels-valeriya-965990.jpg", description: "A delicate and powdery fragrance, perfect for daily use, leaving a subtle yet lasting impression." },
-    { id: 10, name: "Perfume 10", price: 2599, image: "p2-264870.jpg", description: "A vibrant and energetic scent with a burst of citrus, ideal for those who embrace life with enthusiasm." },
-    { id: 11, name: "Perfume 11", price: 2699, image: "3.jpg", description: "A mysterious and alluring fragrance with deep, rich notes, perfect for captivating attention." },
-    { id: 12, name: "Perfume 12", price: 2799, image: "p3-50725-325527.jpg", description: "A classic and timeless aroma, embodying pure elegance and sophistication for any occasion." },
-    { id: 13, name: "Perfume 13", price: 2899, image: "p13-6310591.jpg", description: "A modern and chic fragrance with a hint of spice, perfect for the contemporary individual." },
-    { id: 14, name: "Perfume 14", price: 2999, image: "p14bowska-8361484.jpg", description: "A refreshing and clean scent, perfect for a summer day, evoking feelings of joy and freedom." },
-    { id: 15, name: "Perfume 15", price: 3099, image: "p15-33109913.jpg", description: "A luxurious and opulent fragrance with a long-lasting trail, designed for those who appreciate the finer things in life." },
-    { id: 16, name: "Perfume 16", price: 3199, image: "8.jpg", description: "A captivating blend of sweet and woody notes, perfect for creating unforgettable memories." },
-    { id: 17, name: "Perfume 17", price: 3299, image: "9.jpg", description: "An invigorating and uplifting scent with green accords, ideal for energizing your spirit." },
-    { id: 18, name: "Perfume 18", price: 3399, image: "pe10-965730.jpg", description: "A sensual and warm fragrance, ideal for romantic evenings and intimate moments." },
-    { id: 19, name: "Perfume 19", price: 3499, image: "16b-o-phuc-34482444-11927264.jpg", description: "A unique and distinctive aroma with a touch of the unexpected, perfect for making a statement." },
-    { id: 20, name: "Perfume 20", price: 3599, image: "p208625543.jpg", description: "A powerful and memorable fragrance that leaves a statement, designed for those who dare to stand out." }
-];
+            { 
+                id: 1, 
+                name: "Ocean Breeze", 
+                price: 1299, 
+                originalPrice: 1599,
+                image: "karly-jones-4i9ef6xU738-unsplash.jpg", 
+                description: "Experience the freshness of citrus and sea salt, a perfect blend that invigorates your senses and refreshes your spirit. This vibrant fragrance captures the essence of a coastal getaway.",
+                category: "Fresh Citrus",
+                topNotes: "Bergamot, Lemon, Sea Salt",
+                heartNotes: "Aquatic Accords, White Musk",
+                baseNotes: "Cedarwood, Amber",
+                perfectFor: "Summer & Beach"
+            },
+            { 
+                id: 2, 
+                name: "Romantic Rose", 
+                price: 1499, 
+                originalPrice: 1799,
+                image: "birgith-roosipuu-nka_sIQpKEU-unsplash.jpg", 
+                description: "An elegant floral bouquet that captures the essence of blooming jasmine and delicate rose petals, perfect for romantic evenings and special occasions.",
+                category: "Floral Romance",
+                topNotes: "Pink Pepper, Mandarin",
+                heartNotes: "Jasmine, Rose, Peony",
+                baseNotes: "Sandalwood, Musk, Patchouli",
+                perfectFor: "Evening & Dates"
+            },
+            { 
+                id: 3, 
+                name: "Spice of Life", 
+                price: 1799, 
+                originalPrice: 2099,
+                image: "yixian-zhao-q7iZCOXGOWY-unsplash.jpg", 
+                description: "A warm and spicy aroma that envelops you in a cozy embrace, ideal for evening wear and intimate gatherings. The perfect balance of warmth and elegance.",
+                category: "Warm Spice",
+                topNotes: "Cinnamon, Clove, Cardamom",
+                heartNotes: "Amber, Vanilla",
+                baseNotes: "Leather, Musk, Oakmoss",
+                perfectFor: "Winter & Evening"
+            },
+            { 
+                id: 4, 
+                name: "Fruity Paradise", 
+                price: 1999, 
+                originalPrice: 2399,
+                image: "delfina-iacub-nrkgRRskOBo-unsplash.jpg", 
+                description: "A sweet and playful fragrance with fruity undertones, perfect for those who love to express their vibrant personality and zest for life.",
+                category: "Fruity Sweet",
+                topNotes: "Passion Fruit, Pear",
+                heartNotes: "Peach, Raspberry",
+                baseNotes: "Vanilla, Caramel, Amber",
+                perfectFor: "Daily Wear & Spring"
+            },
+            { 
+                id: 5, 
+                name: "Woody Elegance", 
+                price: 2099, 
+                originalPrice: 2499,
+                image: "filip-baotic-tgqnnQfq6C8-unsplash.jpg", 
+                description: "A sophisticated blend of woody notes and musk, exuding confidence and elegance for the modern individual who values quality and refinement.",
+                category: "Woody Aromatic",
+                topNotes: "Lavender, Cypress",
+                heartNotes: "Iris, Geranium",
+                baseNotes: "Cedarwood, Vetiver, Musk",
+                perfectFor: "Formal & Professional"
+            },
+            { 
+                id: 6, 
+                name: "Spring Garden", 
+                price: 2199, 
+                originalPrice: 2599,
+                image: "laurissi-CVz2Ove_NuI-unsplash.jpg", 
+                description: "A light and airy scent reminiscent of a spring garden, bringing a sense of tranquility and freshness to your day with every application.",
+                category: "Fresh Floral",
+                topNotes: "Green Apple, Lemon",
+                heartNotes: "Lilac, Lily of the Valley",
+                baseNotes: "Green Tea, Moss",
+                perfectFor: "Spring & Daytime"
+            },
+            { 
+                id: 7, 
+                name: "Exotic Amber", 
+                price: 2299, 
+                originalPrice: 2799,
+                image: "pesce-huang-mq73cWf9ZAQ-unsplash.jpg", 
+                description: "An exotic fragrance with hints of amber and vanilla, perfect for those who dare to be different and embrace their uniqueness with confidence.",
+                category: "Amber Vanilla",
+                topNotes: "Saffron, Cinnamon",
+                heartNotes: "Amber, Oud",
+                baseNotes: "Vanilla, Tonka Bean, Musk",
+                perfectFor: "Night Out & Special Events"
+            },
+            { 
+                id: 8, 
+                name: "Bold Adventure", 
+                price: 2399, 
+                originalPrice: 2899,
+                image: "heidi-walley-m6sh2vS0Yjk-unsplash.jpg", 
+                description: "A bold and confident scent with a touch of leather, designed for the fearless and adventurous spirit who dares to make a statement.",
+                category: "Leather Aromatic",
+                topNotes: "Black Pepper, Ginger",
+                heartNotes: "Leather Accord, Tobacco",
+                baseNotes: "Amber, Oud, Musk",
+                perfectFor: "Adventurous & Daring"
+            },
+            { 
+                id: 9, 
+                name: "Powder Soft", 
+                price: 2499, 
+                originalPrice: 2999,
+                image: "pexels-valeriya-965990.jpg", 
+                description: "A delicate and powdery fragrance, perfect for daily use, leaving a subtle yet lasting impression that whispers elegance.",
+                category: "Powdery Floral",
+                topNotes: "Grapefruit, Pink Pepper",
+                heartNotes: "Peony, Violet",
+                baseNotes: "Musk, Sandalwood",
+                perfectFor: "Daily Wear & Office"
+            },
+            { 
+                id: 10, 
+                name: "Citrus Burst", 
+                price: 2599, 
+                originalPrice: 3099,
+                image: "p2-264870.jpg", 
+                description: "A vibrant and energetic scent with a burst of citrus, ideal for those who embrace life with enthusiasm and positivity.",
+                category: "Energetic Citrus",
+                topNotes: "Orange, Grapefruit, Tangerine",
+                heartNotes: "Neroli, Petitgrain",
+                baseNotes: "Amber, Musk",
+                perfectFor: "Morning & Energizing"
+            },
+            { 
+                id: 11, 
+                name: "Mysterious Enigma", 
+                price: 2699, 
+                originalPrice: 3199,
+                image: "3.jpg", 
+                description: "A mysterious and alluring fragrance with deep, rich notes, perfect for captivating attention and leaving an unforgettable impression.",
+                category: "Mysterious Oriental",
+                topNotes: "Rose, Oud",
+                heartNotes: "Jasmine, Amber",
+                baseNotes: "Sandalwood, Musk, Vetiver",
+                perfectFor: "Evening & Seduction"
+            },
+            { 
+                id: 12, 
+                name: "Classic Elegance", 
+                price: 2799, 
+                originalPrice: 3299,
+                image: "p3-50725-325527.jpg", 
+                description: "A classic and timeless aroma, embodying pure elegance and sophistication for any occasion, standing the test of time.",
+                category: "Classic Timeless",
+                topNotes: "Lavender, Bergamot",
+                heartNotes: "Rose, Iris",
+                baseNotes: "Sandalwood, Patchouli, Amber",
+                perfectFor: "All Occasions"
+            },
+            { 
+                id: 13, 
+                name: "Modern Chic", 
+                price: 2899, 
+                originalPrice: 3399,
+                image: "p13-6310591.jpg", 
+                description: "A modern and chic fragrance with a hint of spice, perfect for the contemporary individual who values style and innovation.",
+                category: "Modern Oriental",
+                topNotes: "Pink Pepper, Cardamom",
+                heartNotes: "Cinnamon, Clove",
+                baseNotes: "Amber, Vanilla, Musk",
+                perfectFor: "Contemporary & Trendy"
+            },
+            { 
+                id: 14, 
+                name: "Summer Splash", 
+                price: 2999, 
+                originalPrice: 3599,
+                image: "p14bowska-8361484.jpg", 
+                description: "A refreshing and clean scent, perfect for a summer day, evoking feelings of joy and freedom with every spritz.",
+                category: "Fresh & Clean",
+                topNotes: "Coconut, Pineapple",
+                heartNotes: "Aquatic Notes, Peach",
+                baseNotes: "Musk, Sandalwood",
+                perfectFor: "Summer & Beach Days"
+            },
+            { 
+                id: 15, 
+                name: "Luxury Opulent", 
+                price: 3099, 
+                originalPrice: 3799,
+                image: "p15-33109913.jpg", 
+                description: "A luxurious and opulent fragrance with a long-lasting trail, designed for those who appreciate the finer things in life.",
+                category: "Luxury Prestige",
+                topNotes: "Saffron, Rose",
+                heartNotes: "Oud, Jasmine",
+                baseNotes: "Sandalwood, Amber, Musk",
+                perfectFor: "Premium & Luxury"
+            },
+            { 
+                id: 16, 
+                name: "Sweet Woody", 
+                price: 3199, 
+                originalPrice: 3899,
+                image: "8.jpg", 
+                description: "A captivating blend of sweet and woody notes, perfect for creating unforgettable memories and leaving a lasting impression.",
+                category: "Sweet Wood",
+                topNotes: "Caramel, Vanilla",
+                heartNotes: "Amber, Tonka",
+                baseNotes: "Cedarwood, Sandalwood",
+                perfectFor: "Evening & Romance"
+            },
+            { 
+                id: 17, 
+                name: "Green Vitality", 
+                price: 3299, 
+                originalPrice: 3999,
+                image: "9.jpg", 
+                description: "An invigorating and uplifting scent with green accords, ideal for energizing your spirit and boosting your confidence.",
+                category: "Fresh Green",
+                topNotes: "Galbanum, Green Tea",
+                heartNotes: "Herbs, Geranium",
+                baseNotes: "Vetiver, Musk",
+                perfectFor: "Daytime & Energizing"
+            },
+            { 
+                id: 18, 
+                name: "Sensual Warmth", 
+                price: 3399, 
+                originalPrice: 4099,
+                image: "pe10-965730.jpg", 
+                description: "A sensual and warm fragrance, ideal for romantic evenings and intimate moments that create chemistry and connection.",
+                category: "Sensual Oriental",
+                topNotes: "Saffron, Pepper",
+                heartNotes: "Amber, Vanilla",
+                baseNotes: "Musk, Sandalwood, Patchouli",
+                perfectFor: "Romantic & Intimate"
+            },
+            { 
+                id: 19, 
+                name: "Unique Statement", 
+                price: 3499, 
+                originalPrice: 4199,
+                image: "16b-o-phuc-34482444-11927264.jpg", 
+                description: "A unique and distinctive aroma with a touch of the unexpected, perfect for making a bold statement and standing out from the crowd.",
+                category: "Unique Avant-Garde",
+                topNotes: "Bergamot, Black Currant",
+                heartNotes: "Iris, Violet",
+                baseNotes: "Patchouli, Leather, Amber",
+                perfectFor: "Artistic & Bold"
+            },
+            { 
+                id: 20, 
+                name: "Powerful Legacy", 
+                price: 3599, 
+                originalPrice: 4299,
+                image: "p208625543.jpg", 
+                description: "A powerful and memorable fragrance that leaves a statement, designed for those who dare to stand out and create their own legacy.",
+                category: "Powerful Statement",
+                topNotes: "Cinnamon, Saffron",
+                heartNotes: "Oud, Amber",
+                baseNotes: "Sandalwood, Musk, Vetiver",
+                perfectFor: "Confident & Powerful"
+            }
+        ];
+
         document.addEventListener("DOMContentLoaded", () => {
             const urlParams = new URLSearchParams(window.location.search);
             const productId = parseInt(urlParams.get('id'));
@@ -149,27 +826,150 @@
             const product = productsData.find(p => p.id === productId);
 
             if (product) {
+                // Set image and basic info
                 document.getElementById("product-image").src = product.image;
                 document.getElementById("product-image").alt = product.name;
                 document.getElementById("product-name").textContent = product.name;
+                document.getElementById("product-category").textContent = product.category;
                 document.getElementById("product-description").textContent = product.description;
-                document.getElementById("product-price").textContent = `Price: $${product.price}`;
+                document.getElementById("product-price").textContent = `₹${product.price}`;
+                document.getElementById("original-price").textContent = `₹${product.originalPrice}`;
+                document.getElementById("rating").textContent = `(${250 + productId * 15} Reviews)`;
 
+                // Set fragrance notes
+                document.getElementById("top-notes").textContent = product.topNotes;
+                document.getElementById("heart-notes").textContent = product.heartNotes;
+                document.getElementById("base-notes").textContent = product.baseNotes;
+                document.getElementById("perfect-for").textContent = product.perfectFor;
+
+                // Add to cart functionality
                 const addToCartBtn = document.getElementById("add-to-cart-btn");
                 addToCartBtn.addEventListener("click", () => {
+                    const quantity = parseInt(document.getElementById("quantity").value) || 1;
                     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-                    cart.push({ name: product.name, price: product.price, image: product.image });
+                    
+                    for (let i = 0; i < quantity; i++) {
+                        cart.push({ 
+                            name: product.name, 
+                            price: product.price, 
+                            image: product.image,
+                            id: product.id 
+                        });
+                    }
+                    
                     localStorage.setItem("cart", JSON.stringify(cart));
-                    window.location.href = "cart.html";
+                    
+                    // Show success message
+                    showAddToCartSuccess(quantity);
+                    
+                    setTimeout(() => {
+                        window.location.href = "cart.html";
+                    }, 1500);
+                });
+
+                // Wishlist functionality
+                const wishlistBtn = document.getElementById("add-to-wishlist-btn");
+                wishlistBtn.addEventListener("click", () => {
+                    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+                    const exists = wishlist.some(item => item.id === product.id);
+                    
+                    if (!exists) {
+                        wishlist.push({ 
+                            name: product.name, 
+                            price: product.price, 
+                            image: product.image,
+                            id: product.id 
+                        });
+                        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                        wishlistBtn.style.background = "#d71e06";
+                        wishlistBtn.style.color = "white";
+                        showNotification("Added to Wishlist!", "success");
+                    } else {
+                        wishlist = wishlist.filter(item => item.id !== product.id);
+                        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                        wishlistBtn.style.background = "white";
+                        wishlistBtn.style.color = "#d71e06";
+                        showNotification("Removed from Wishlist!", "info");
+                    }
                 });
             } else {
-                // Handle case where product is not found
-                document.querySelector('.product-detail-container').innerHTML = `
-                    <p>Product not found.</p>
-                    <a href="products.html" class="back-button">Back to Products</a>
+                document.querySelector('.product-detail-wrapper').innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 20px; margin-top: 80px;">
+                        <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #d71e06; margin-bottom: 20px;"></i>
+                        <h2 style="color: #1d2321; margin: 20px 0;">Product Not Found</h2>
+                        <p style="color: #666; margin-bottom: 30px;">The product you're looking for doesn't exist or has been removed.</p>
+                        <a href="products.html" class="back-button" style="display: inline-block;">
+                            <i class="fas fa-arrow-left"></i> Back to Products
+                        </a>
+                    </div>
                 `;
             }
         });
+
+        function showAddToCartSuccess(quantity) {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #d71e06, #ff8c3a);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 12px;
+                box-shadow: 0 8px 24px rgba(215, 30, 6, 0.3);
+                z-index: 9999;
+                animation: slideInRight 0.5s ease-out;
+                font-weight: 600;
+            `;
+            message.innerHTML = `<i class="fas fa-check-circle"></i> ${quantity} item${quantity > 1 ? 's' : ''} added to cart!`;
+            document.body.appendChild(message);
+            setTimeout(() => message.remove(), 3000);
+        }
+
+        function showNotification(text, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                z-index: 9999;
+                animation: slideUp 0.5s ease-out;
+            `;
+            notification.textContent = text;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideUp {
+                from {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

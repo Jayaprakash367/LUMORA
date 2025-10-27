@@ -3,81 +3,704 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
-     <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+    <title>LUMORA - Sign Up</title>
+    <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <body>
-        <form>
-            <h1 style="color: rgb(58, 58, 74);"><i>SIGN UP</i></h1>
-            <div style="position: relative; display: flex; align-items: center; margin-bottom: 16px;">
-                <input type="text" id="username" name="username" placeholder="Username" style="padding: 5px 30px 5px 5px; border-radius: 5px; border: 1px solid #ccc; width: 100%;" required>
-                <img src="https://cdn-icons-png.flaticon.com/128/666/666201.png" alt="User Icon" style="position: absolute; right: 8px; width: 20px; height: 20px; opacity: 0.7; pointer-events: none;">
-            </div>
-            <div style="position: relative; display: flex; align-items: center; margin-bottom: 16px;">
-                <input type="email" id="email" name="email" placeholder="Email" style="padding: 5px 30px 5px 5px; border-radius: 5px; border: 1px solid #ccc; width: 100%;" required>
-                <img src="https://cdn-icons-png.flaticon.com/128/561/561127.png" alt="Email Icon" style="position: absolute; right: 8px; width: 20px; height: 20px; opacity: 0.7; pointer-events: none;">
-            </div>
-            <div style="position: relative; display: flex; align-items: center;">
-                <input type="password" id="password" name="password" placeholder="Password" style="padding: 5px 30px 5px 5px; border-radius: 5px; border: 1px solid #ccc; width: 100%;" required>
-                <img src="https://cdn-icons-png.flaticon.com/128/709/709612.png" id="togglePassword" alt="Show Password" title="Show Password" style="position: absolute; right: 8px; width: 22px; height: 22px; cursor: pointer; opacity: 0.7;">
-            </div>
-            <br><br>
-            <button type="submit" style="color: rgb(15, 15, 17); background-color: #9786a3; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Sign Up</button>
-            <br>
-            <p>Already have an account? <a href="login.html"><u>Login</u></a></p>
-        </form>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
 
-        <script src="index.js" defer></script> <script>
-            // Password show/hide toggle logic (copied from your original sign.html)
-            const togglePassword = document.getElementById('togglePassword');
-            const pwd = document.getElementById('password');
-            if (togglePassword && pwd) { // Added check to ensure elements exist
-                togglePassword.addEventListener('click', function() {
-                    if (pwd.type === 'password') {
-                        pwd.type = 'text';
-                        this.src = 'https://cdn-icons-png.flaticon.com/128/2767/2767146.png';
-                        this.title = 'Hide Password';
-                        this.alt = 'Hide Password';
-                        this.style.opacity = 1;
-                    } else {
-                        pwd.type = 'password';
-                        this.src = 'https://cdn-icons-png.flaticon.com/128/709/709612.png';
-                        this.title = 'Show Password';
-                        this.alt = 'Show Password';
-                        this.style.opacity = 0.7;
-                    }
-                });
+        .signup-container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signup-left {
+            flex: 1.2;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .signup-right {
+            flex: 1;
+            background: linear-gradient(135deg, #ff8c3a, #d71e06);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-right::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite reverse;
+        }
+
+        @keyframes float {
+            from {
+                transform: translate(-50px, -50px);
+            }
+            to {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .brand-logo img {
+            width: 50px;
+            height: 50px;
+            filter: brightness(0) invert(1);
+        }
+
+        .brand-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .join-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .join-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            z-index: 2;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            list-style: none;
+            z-index: 2;
+            position: relative;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .feature-item i {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .signup-title {
+            font-size: 2.5rem;
+            color: #1d2321;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .signup-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: -8px;
+            left: 15px;
+            background: white;
+            padding: 0 8px;
+            font-size: 0.85rem;
+            color: #d71e06;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px 50px 18px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #d71e06;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(215, 30, 6, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #aaa;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .input-icon:hover {
+            color: #d71e06;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            font-size: 0.85rem;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 4px;
+            background: #e1e5e9;
+            border-radius: 2px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .strength-weak .strength-fill {
+            width: 33%;
+            background: #ff4757;
+        }
+
+        .strength-medium .strength-fill {
+            width: 66%;
+            background: #ffa726;
+        }
+
+        .strength-strong .strength-fill {
+            width: 100%;
+            background: #26de81;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .checkbox-input {
+            width: 18px;
+            height: 18px;
+            accent-color: #d71e06;
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .checkbox-label a {
+            color: #d71e06;
+            text-decoration: none;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(215, 30, 6, 0.3);
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(215, 30, 6, 0.4);
+        }
+
+        .signup-btn:active {
+            transform: translateY(0);
+        }
+
+        .signup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .social-signup {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .social-text {
+            color: #999;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .social-text::before,
+        .social-text::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: #e1e5e9;
+        }
+
+        .social-text::before {
+            left: 0;
+        }
+
+        .social-text::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-btn:hover {
+            border-color: #d71e06;
+            transform: translateY(-2px);
+        }
+
+        .google {
+            color: #db4437;
+        }
+
+        .facebook {
+            color: #3b5998;
+        }
+
+        .twitter {
+            color: #1da1f2;
+        }
+
+        .login-link {
+            text-align: center;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #d71e06;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #ff8c3a;
+        }
+
+        @media (max-width: 768px) {
+            .signup-container {
+                flex-direction: column-reverse;
+                max-width: 450px;
             }
 
-            // Handle signup form submission
-            document.querySelector('form').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission
+            .signup-left {
+                padding: 40px 30px;
+            }
 
-                const username = document.getElementById('username').value;
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
+            .signup-right {
+                padding: 40px 30px;
+            }
 
-                console.log('Signup attempted with:', { username, email, password });
+            .brand-title {
+                font-size: 2rem;
+            }
 
-                // Simulate successful signup
-                sessionStorage.setItem('isLoggedIn', 'true'); // Mark user as logged in after signup
-                // Use the globally available showMessage function from index.js
-                if (typeof showMessage === 'function') {
-                    showMessage("Signup successful! Redirecting to home page...", true);
-                } else {
-                    console.error("showMessage function not available.");
-                    // Fallback for immediate redirect if showMessage isn't loaded
-                    window.location.href = "main.html";
+            .signup-title {
+                font-size: 2rem;
+            }
+
+            .join-text {
+                font-size: 1.2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signup-container">
+        <div class="signup-left">
+            <div class="signup-header">
+                <h2 class="signup-title">Join LUMORA</h2>
+                <p class="signup-subtitle">Create your account and discover your signature scent</p>
+            </div>
+            
+            <form id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Enter your first name" required>
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Enter your last name" required>
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                    <i class="fas fa-envelope input-icon"></i>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Choose a username" required>
+                    <i class="fas fa-at input-icon"></i>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Create a strong password" required>
+                    <i class="fas fa-eye input-icon" id="togglePassword"></i>
+                    <div class="password-strength" id="passwordStrength">
+                        <div class="strength-bar">
+                            <div class="strength-fill"></div>
+                        </div>
+                        <span class="strength-text">Password strength: <span id="strengthText">Enter password</span></span>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" class="checkbox-input" required>
+                    <label for="terms" class="checkbox-label">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="newsletter" class="checkbox-input">
+                    <label for="newsletter" class="checkbox-label">
+                        Subscribe to our newsletter for exclusive offers and new arrivals
+                    </label>
+                </div>
+                
+                <button type="submit" class="signup-btn" id="signupBtn">
+                    <span id="signupText">Create Account</span>
+                    <i class="fas fa-user-plus" style="margin-left: 10px;"></i>
+                </button>
+            </form>
+            
+            <div class="social-signup">
+                <p class="social-text">Or sign up with</p>
+                <div class="social-buttons">
+                    <button class="social-btn google" title="Sign up with Google" aria-label="Sign up with Google">
+                        <i class="fab fa-google" aria-hidden="true"></i>
+                    </button>
+                    <button class="social-btn facebook" title="Sign up with Facebook" aria-label="Sign up with Facebook">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                    </button>
+                    <button class="social-btn twitter" title="Sign up with Twitter" aria-label="Sign up with Twitter">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="login-link">
+                <p>Already have an account? <a href="login.html">Sign In</a></p>
+            </div>
+        </div>
+        
+        <div class="signup-right">
+            <div class="brand-logo">
+                <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="LUMORA">
+                <h1 class="brand-title">LUMORA</h1>
+            </div>
+            <h2 class="join-text">Join Our Community</h2>
+            <p class="join-desc">
+                Become part of LUMORA's exclusive fragrance community and unlock a world of premium scents.
+            </p>
+            <ul class="features">
+                <li class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Access to exclusive perfume collections</span>
+                </li>
+                <li class="feature-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Early access to new releases</span>
+                </li>
+                <li class="feature-item">
+                    <i class="fas fa-truck"></i>
+                    <span>Free shipping on orders above ₹500</span>
+                </li>
+                <li class="feature-item">
+                    <i class="fas fa-star"></i>
+                    <span>Personalized fragrance recommendations</span>
+                </li>
+                <li class="feature-item">
+                    <i class="fas fa-heart"></i>
+                    <span>Birthday surprises and special offers</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Password visibility toggle
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Password strength checker
+        const passwordStrength = document.getElementById('passwordStrength');
+        const strengthText = document.getElementById('strengthText');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            
+            // Remove all strength classes
+            passwordStrength.classList.remove('strength-weak', 'strength-medium', 'strength-strong');
+            
+            if (password.length === 0) {
+                strengthText.textContent = 'Enter password';
+            } else if (strength < 30) {
+                passwordStrength.classList.add('strength-weak');
+                strengthText.textContent = 'Weak';
+            } else if (strength < 70) {
+                passwordStrength.classList.add('strength-medium');
+                strengthText.textContent = 'Medium';
+            } else {
+                passwordStrength.classList.add('strength-strong');
+                strengthText.textContent = 'Strong';
+            }
+        });
+
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 25;
+            if (password.length >= 12) strength += 25;
+            
+            // Complexity checks
+            if (/[a-z]/.test(password)) strength += 10;
+            if (/[A-Z]/.test(password)) strength += 10;
+            if (/[0-9]/.test(password)) strength += 10;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 20;
+            
+            return strength;
+        }
+
+        // Form validation and submission
+        const signupForm = document.getElementById('signupForm');
+        const signupBtn = document.getElementById('signupBtn');
+        const signupText = document.getElementById('signupText');
+        
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            signupBtn.disabled = true;
+            signupText.textContent = 'Creating Account...';
+            
+            // Get form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                username: document.getElementById('username').value,
+                password: passwordInput.value
+            };
+            
+            console.log('Signup attempted with:', formData);
+            
+            // Simulate form submission
+            setTimeout(() => {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('userName', formData.firstName + ' ' + formData.lastName);
+                
+                alert('Account created successfully! Welcome to LUMORA, ' + formData.firstName + '!');
+                window.location.href = 'main.html';
+            }, 2000);
+        });
+
+        // Real-time form validation
+        const inputs = document.querySelectorAll('.form-input');
+        const termsCheckbox = document.getElementById('terms');
+        
+        function validateForm() {
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (input.hasAttribute('required') && !input.value.trim()) {
+                    isValid = false;
                 }
-
-
-                setTimeout(() => {
-                    window.location.href = "main.html"; // Redirect to home page
-                }, 1500);
             });
-        </script>
+            
+            if (!termsCheckbox.checked) {
+                isValid = false;
+            }
+            
+            // Check password strength
+            const password = passwordInput.value;
+            const strength = calculatePasswordStrength(password);
+            if (strength < 30) {
+                isValid = false;
+            }
+            
+            signupBtn.disabled = !isValid;
+        }
+        
+        inputs.forEach(input => {
+            input.addEventListener('input', validateForm);
+        });
+        
+        termsCheckbox.addEventListener('change', validateForm);
+        
+        // Initial validation
+        validateForm();
+
+        // Social signup handlers
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const platform = this.classList.contains('google') ? 'Google' : 
+                               this.classList.contains('facebook') ? 'Facebook' : 'Twitter';
+                alert(`${platform} signup would be integrated here!`);
+            });
+        });
+
+        // Add smooth animations on input focus
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentNode.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentNode.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
     </body>
 </html>

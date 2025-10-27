@@ -3,15 +3,471 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMORA</title>
+    <title>LUMORA - Premium Perfumes</title>
     <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Product Modal/Overlay Styles */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .product-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Full Screen Image Modal */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            animation: fadeIn 0.4s ease-out;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+        }
+
+        .fullscreen-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fullscreen-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .fullscreen-close {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            background: #fff;
+            color: #1d2321;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .fullscreen-close:hover {
+            background: #d71e06;
+            color: white;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .fullscreen-info {
+            position: absolute;
+            bottom: -80px;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 12px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .fullscreen-product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1d2321;
+            margin-bottom: 8px;
+        }
+
+        .fullscreen-product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 40px;
+            animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #1d2321;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .modal-close:hover {
+            background: #d71e06;
+            transform: rotate(90deg);
+        }
+
+        .modal-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .modal-image-wrapper {
+            position: relative;
+            cursor: pointer;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .modal-image-wrapper:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px rgba(215, 30, 6, 0.3);
+        }
+
+        .modal-image img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(215, 30, 6, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .fullscreen-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .modal-image-wrapper:hover .fullscreen-overlay {
+            opacity: 1;
+        }
+
+        .fullscreen-icon {
+            color: white;
+            font-size: 3rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .modal-info h2 {
+            font-size: 2.2rem;
+            color: #1d2321;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .modal-category {
+            color: #d71e06;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .modal-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-rating .stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+        }
+
+        .modal-rating .rating-text {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .modal-price {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .modal-original-price {
+            font-size: 1.1rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .modal-specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .modal-spec {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #d71e06;
+        }
+
+        .modal-spec-label {
+            font-size: 0.8rem;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+
+        .modal-spec-value {
+            font-size: 0.95rem;
+            color: #1d2321;
+            font-weight: 600;
+        }
+
+        .modal-highlights {
+            background: linear-gradient(135deg, rgba(215, 30, 6, 0.05), rgba(255, 179, 71, 0.05));
+            border: 2px solid rgba(215, 30, 6, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .modal-highlights-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1d2321;
+            margin-bottom: 10px;
+        }
+
+        .modal-highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .modal-highlight-item i {
+            color: #d71e06;
+            font-size: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-add-to-cart {
+            flex: 1;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(215, 30, 6, 0.3);
+        }
+
+        .modal-add-to-cart:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(215, 30, 6, 0.4);
+        }
+
+        .modal-view-details {
+            flex: 1;
+            padding: 14px 28px;
+            background: white;
+            color: #d71e06;
+            border: 2px solid #d71e06;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .modal-view-details:hover {
+            background: #d71e06;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px 20px;
+            }
+
+            .modal-info h2 {
+                font-size: 1.8rem;
+            }
+
+            .modal-price {
+                font-size: 1.6rem;
+            }
+
+            .modal-specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-add-to-cart,
+            .modal-view-details {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 20px 15px;
+            }
+
+            .modal-image img {
+                max-height: 350px;
+            }
+        }
+    </style>
 </head>
 <body>
      <nav class="navbar">
          <h1 class="candal-regular logo-title">
         <span class="perfume-icon">
-        <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" style="width: 32px; vertical-align: middle;">
+        <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" class="navbar-icon">
         </span> LUMORA
         </h1>
         <div class="nav-links">
@@ -36,81 +492,199 @@
             <p class="side-navbar-links"><a href="#contact-us">contact us</a></p>
         </div>
     </div>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="productModal">
+        <button class="modal-close" onclick="closeProductModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-content">
+            <div class="modal-image">
+                <div class="modal-image-wrapper" onclick="openFullscreenImage()">
+                    <img id="modalImage" src="" alt="Product">
+                    <div class="fullscreen-overlay">
+                        <i class="fas fa-expand-arrows-alt fullscreen-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-info">
+                <p class="modal-category" id="modalCategory">Premium Fragrance</p>
+                <h2 id="modalName"></h2>
+                <div class="modal-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-text" id="modalRating">(250+ Reviews)</span>
+                </div>
+                <div class="modal-price" id="modalPrice"></div>
+                <div class="modal-original-price" id="modalOriginalPrice"></div>
+                <p class="modal-description" id="modalDescription"></p>
+
+                <div class="modal-highlights">
+                    <div class="modal-highlights-title">Why Choose This Perfume?</div>
+                    <div class="modal-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Long-lasting fragrance (8-12 hours)</span>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Premium quality ingredients from France</span>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Cruelty-free and ethically sourced</span>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Elegant gift-worthy packaging</span>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% authentic guarantee</span>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free gift wrapping available</span>
+                    </div>
+                </div>
+
+                <div class="modal-specs-grid">
+                    <div class="modal-spec">
+                        <div class="modal-spec-label">Volume</div>
+                        <div class="modal-spec-value">100 ML</div>
+                    </div>
+                    <div class="modal-spec">
+                        <div class="modal-spec-label">Type</div>
+                        <div class="modal-spec-value">Eau de Parfum</div>
+                    </div>
+                    <div class="modal-spec">
+                        <div class="modal-spec-label">Longevity</div>
+                        <div class="modal-spec-value">8-12 Hours</div>
+                    </div>
+                    <div class="modal-spec">
+                        <div class="modal-spec-label">Perfect For</div>
+                        <div class="modal-spec-value" id="modalPerfectFor">All Seasons</div>
+                    </div>
+                    <div class="modal-spec" style="grid-column: span 2;">
+                        <div class="modal-spec-label">Top Notes</div>
+                        <div class="modal-spec-value" id="modalTopNotes">Citrus, Bergamot</div>
+                    </div>
+                    <div class="modal-spec" style="grid-column: span 2;">
+                        <div class="modal-spec-label">Heart Notes</div>
+                        <div class="modal-spec-value" id="modalHeartNotes">Floral, Rose</div>
+                    </div>
+                    <div class="modal-spec" style="grid-column: span 2;">
+                        <div class="modal-spec-label">Base Notes</div>
+                        <div class="modal-spec-value" id="modalBaseNotes">Musk, Sandalwood</div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="modal-add-to-cart" id="modalAddToCart">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="modal-view-details" id="modalViewDetails">
+                        <i class="fas fa-arrow-right"></i> View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Image Modal -->
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <div class="fullscreen-content">
+            <button class="fullscreen-close" onclick="closeFullscreenImage()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="fullscreenImage" class="fullscreen-image" src="" alt="Product">
+            <div class="fullscreen-info">
+                <div class="fullscreen-product-name" id="fullscreenProductName"></div>
+                <div class="fullscreen-product-price" id="fullscreenProductPrice"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="all-products"><section class="section">
             <h2 class="section-title">New Arrivals</h2>
             <div class="product-grid">
-                <div class="product-card">
-                    <img src="karly-jones-4i9ef6xU738-unsplash.jpg" alt="Perfume 1" onclick="location.href='detail.html?id=1'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="1">
+                    <img src="karly-jones-4i9ef6xU738-unsplash.jpg" alt="Ocean Breeze" onclick="openProductModal(1)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="1299" >Buy Now →</button>
                 </div>
-                <div class="product-card">
-                    <img src="birgith-roosipuu-nka_sIQpKEU-unsplash.jpg" alt="Perfume 2" onclick="location.href='detail.html?id=2'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="2">
+                    <img src="birgith-roosipuu-nka_sIQpKEU-unsplash.jpg" alt="Romantic Rose" onclick="openProductModal(2)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="1499" >Buy Now →</button>
               </div>
-                <div class="product-card">
-                    <img src="yixian-zhao-q7iZCOXGOWY-unsplash.jpg" alt="Perfume 3" onclick="location.href='detail.html?id=3'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="3">
+                    <img src="yixian-zhao-q7iZCOXGOWY-unsplash.jpg" alt="Spice of Life" onclick="openProductModal(3)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="1799" >Buy Now →</button>
                  </div>
-                <div class="product-card">
-                    <img src="delfina-iacub-nrkgRRskOBo-unsplash.jpg" alt="Perfume 4" onclick="location.href='detail.html?id=4'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="4">
+                    <img src="delfina-iacub-nrkgRRskOBo-unsplash.jpg" alt="Fruity Paradise" onclick="openProductModal(4)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="1999" >Buy Now →</button>
                 </div>
-                <div class="product-card">
-                    <img src="filip-baotic-tgqnnQfq6C8-unsplash.jpg" alt="Perfume 5" onclick="location.href='detail.html?id=5'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="5">
+                    <img src="filip-baotic-tgqnnQfq6C8-unsplash.jpg" alt="Woody Elegance" onclick="openProductModal(5)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2099" >Buy Now →</button>
                  </div>
-                <div class="product-card">
-                    <img src="laurissi-CVz2Ove_NuI-unsplash.jpg" alt="Perfume 6" onclick="location.href='detail.html?id=6'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="6">
+                    <img src="laurissi-CVz2Ove_NuI-unsplash.jpg" alt="Spring Garden" onclick="openProductModal(6)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2199" >Buy Now →</button>
                 </div>
-                <div class="product-card">
-                    <img src="pesce-huang-mq73cWf9ZAQ-unsplash.jpg" alt="Perfume 7" onclick="location.href='detail.html?id=7'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="7">
+                    <img src="pesce-huang-mq73cWf9ZAQ-unsplash.jpg" alt="Exotic Amber" onclick="openProductModal(7)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2299" >Buy Now →</button>
                 </div>
-                <div class="product-card">
-                    <img src="heidi-walley-m6sh2vS0Yjk-unsplash.jpg" alt="Perfume 8" onclick="location.href='detail.html?id=8'" style="cursor:pointer;" />
+                <div class="product-card" data-product-id="8">
+                    <img src="heidi-walley-m6sh2vS0Yjk-unsplash.jpg" alt="Bold Adventure" onclick="openProductModal(8)" style="cursor:pointer;" />
                     <button class="shop-btn" data-price="2399" >Buy Now →</button>
                  </div>
-                <div class="product-card">
-                    <img src="pexels-valeriya-965990.jpg" alt="Perfume 9" onclick="location.href='detail.html?id=9'" style="cursor:pointer;"/>
+                <div class="product-card" data-product-id="9">
+                    <img src="pexels-valeriya-965990.jpg" alt="Powder Soft" onclick="openProductModal(9)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2499" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="p2-264870.jpg" alt="Perfume 10" onclick="location.href='detail.html?id=10'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="10">
+                    <img src="p2-264870.jpg" alt="Citrus Burst" onclick="openProductModal(10)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2599" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="3.jpg" alt="Perfume 11" onclick="location.href='detail.html?id=11'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="11">
+                    <img src="3.jpg" alt="Mysterious Enigma" onclick="openProductModal(11)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2699" >Buy Now →</button>
-                    
-                </div><div class="product-card">
-                    <img src="p3-50725-325527.jpg" alt="Perfume 12" onclick="location.href='detail.html?id=12'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="12">
+                    <img src="p3-50725-325527.jpg" alt="Classic Elegance" onclick="openProductModal(12)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2799" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="p13-6310591.jpg" alt="Perfume 13" onclick="location.href='detail.html?id=13'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="13">
+                    <img src="p13-6310591.jpg" alt="Modern Chic" onclick="openProductModal(13)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="2899" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="p14bowska-8361484.jpg" alt="Perfume 14" onclick="location.href='detail.html?id=14'" style="cursor:pointer;" />
+                </div>
+                <div class="product-card" data-product-id="14">
+                    <img src="p14bowska-8361484.jpg" alt="Summer Splash" onclick="openProductModal(14)" style="cursor:pointer;" />
                     <button class="shop-btn" data-price="2999" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="p15-33109913.jpg" alt="Perfume 15" onclick="location.href='detail.html?id=15'" style="cursor:pointer;" />
+                </div>
+                <div class="product-card" data-product-id="15">
+                    <img src="p15-33109913.jpg" alt="Luxury Opulent" onclick="openProductModal(15)" style="cursor:pointer;" />
                     <button class="shop-btn" data-price="3099" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="8.jpg" alt="Perfume 16" onclick="location.href='detail.html?id=16'" style="cursor:pointer;" />
+                </div>
+                <div class="product-card" data-product-id="16">
+                    <img src="8.jpg" alt="Sweet Woody" onclick="openProductModal(16)" style="cursor:pointer;" />
                     <button class="shop-btn" data-price="3199" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="9.jpg" alt="Perfume 17" onclick="location.href='detail.html?id=17'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="17">
+                    <img src="9.jpg" alt="Green Vitality" onclick="openProductModal(17)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="3299" >Buy Now →</button>
-                    
-                </div><div class="product-card">
-                    <img src="pe10-965730.jpg" alt="Perfume 18" onclick="location.href='detail.html?id=18'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="18">
+                    <img src="pe10-965730.jpg" alt="Sensual Warmth" onclick="openProductModal(18)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="3399" >Buy Now →</button>
-                    
-                </div><div class="product-card">
-                    <img src="16b-o-phuc-34482444-11927264.jpg" alt="Perfume 19" onclick="location.href='detail.html?id=19'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="19">
+                    <img src="16b-o-phuc-34482444-11927264.jpg" alt="Unique Statement" onclick="openProductModal(19)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="3499" >Buy Now →</button>
-                </div><div class="product-card">
-                    <img src="p208625543.jpg" alt="Perfume 20" onclick="location.href='detail.html?id=20'" style="cursor:pointer;"/>
+                </div>
+                <div class="product-card" data-product-id="20">
+                    <img src="p208625543.jpg" alt="Powerful Legacy" onclick="openProductModal(20)" style="cursor:pointer;"/>
                     <button class="shop-btn" data-price="3599" >Buy Now →</button>
-                   
                 </div>
             </div>
         </section></div>
@@ -122,39 +696,402 @@
         <button class="button">Contact Us</button>
     </a>
 </div>
+
 <script>
-  const shopButtons = document.querySelectorAll(".shop-btn");
-  const detailButtons = document.querySelectorAll(".detail-btn"); // Select all detail buttons
+    const productsData = [
+        { 
+            id: 1, 
+            name: "Ocean Breeze", 
+            price: 1299, 
+            originalPrice: 1599,
+            image: "karly-jones-4i9ef6xU738-unsplash.jpg", 
+            description: "Experience the freshness of citrus and sea salt, a perfect blend that invigorates your senses and refreshes your spirit. This vibrant fragrance captures the essence of a coastal getaway.",
+            category: "Fresh Citrus",
+            topNotes: "Bergamot, Lemon, Sea Salt",
+            heartNotes: "Aquatic Accords, White Musk",
+            baseNotes: "Cedarwood, Amber",
+            perfectFor: "Summer & Beach"
+        },
+        { 
+            id: 2, 
+            name: "Romantic Rose", 
+            price: 1499, 
+            originalPrice: 1799,
+            image: "birgith-roosipuu-nka_sIQpKEU-unsplash.jpg", 
+            description: "An elegant floral bouquet that captures the essence of blooming jasmine and delicate rose petals, perfect for romantic evenings and special occasions.",
+            category: "Floral Romance",
+            topNotes: "Pink Pepper, Mandarin",
+            heartNotes: "Jasmine, Rose, Peony",
+            baseNotes: "Sandalwood, Musk, Patchouli",
+            perfectFor: "Evening & Dates"
+        },
+        { 
+            id: 3, 
+            name: "Spice of Life", 
+            price: 1799, 
+            originalPrice: 2099,
+            image: "yixian-zhao-q7iZCOXGOWY-unsplash.jpg", 
+            description: "A warm and spicy aroma that envelops you in a cozy embrace, ideal for evening wear and intimate gatherings. The perfect balance of warmth and elegance.",
+            category: "Warm Spice",
+            topNotes: "Cinnamon, Clove, Cardamom",
+            heartNotes: "Amber, Vanilla",
+            baseNotes: "Leather, Musk, Oakmoss",
+            perfectFor: "Winter & Evening"
+        },
+        { 
+            id: 4, 
+            name: "Fruity Paradise", 
+            price: 1999, 
+            originalPrice: 2399,
+            image: "delfina-iacub-nrkgRRskOBo-unsplash.jpg", 
+            description: "A sweet and playful fragrance with fruity undertones, perfect for those who love to express their vibrant personality and zest for life.",
+            category: "Fruity Sweet",
+            topNotes: "Passion Fruit, Pear",
+            heartNotes: "Peach, Raspberry",
+            baseNotes: "Vanilla, Caramel, Amber",
+            perfectFor: "Daily Wear & Spring"
+        },
+        { 
+            id: 5, 
+            name: "Woody Elegance", 
+            price: 2099, 
+            originalPrice: 2499,
+            image: "filip-baotic-tgqnnQfq6C8-unsplash.jpg", 
+            description: "A sophisticated blend of woody notes and musk, exuding confidence and elegance for the modern individual who values quality and refinement.",
+            category: "Woody Aromatic",
+            topNotes: "Lavender, Cypress",
+            heartNotes: "Iris, Geranium",
+            baseNotes: "Cedarwood, Vetiver, Musk",
+            perfectFor: "Formal & Professional"
+        },
+        { 
+            id: 6, 
+            name: "Spring Garden", 
+            price: 2199, 
+            originalPrice: 2599,
+            image: "laurissi-CVz2Ove_NuI-unsplash.jpg", 
+            description: "A light and airy scent reminiscent of a spring garden, bringing a sense of tranquility and freshness to your day with every application.",
+            category: "Fresh Floral",
+            topNotes: "Green Apple, Lemon",
+            heartNotes: "Lilac, Lily of the Valley",
+            baseNotes: "Green Tea, Moss",
+            perfectFor: "Spring & Daytime"
+        },
+        { 
+            id: 7, 
+            name: "Exotic Amber", 
+            price: 2299, 
+            originalPrice: 2799,
+            image: "pesce-huang-mq73cWf9ZAQ-unsplash.jpg", 
+            description: "An exotic fragrance with hints of amber and vanilla, perfect for those who dare to be different and embrace their uniqueness with confidence.",
+            category: "Amber Vanilla",
+            topNotes: "Saffron, Cinnamon",
+            heartNotes: "Amber, Oud",
+            baseNotes: "Vanilla, Tonka Bean, Musk",
+            perfectFor: "Night Out & Special Events"
+        },
+        { 
+            id: 8, 
+            name: "Bold Adventure", 
+            price: 2399, 
+            originalPrice: 2899,
+            image: "heidi-walley-m6sh2vS0Yjk-unsplash.jpg", 
+            description: "A bold and confident scent with a touch of leather, designed for the fearless and adventurous spirit who dares to make a statement.",
+            category: "Leather Aromatic",
+            topNotes: "Black Pepper, Ginger",
+            heartNotes: "Leather Accord, Tobacco",
+            baseNotes: "Amber, Oud, Musk",
+            perfectFor: "Adventurous & Daring"
+        },
+        { 
+            id: 9, 
+            name: "Powder Soft", 
+            price: 2499, 
+            originalPrice: 2999,
+            image: "pexels-valeriya-965990.jpg", 
+            description: "A delicate and powdery fragrance, perfect for daily use, leaving a subtle yet lasting impression that whispers elegance.",
+            category: "Powdery Floral",
+            topNotes: "Grapefruit, Pink Pepper",
+            heartNotes: "Peony, Violet",
+            baseNotes: "Musk, Sandalwood",
+            perfectFor: "Daily Wear & Office"
+        },
+        { 
+            id: 10, 
+            name: "Citrus Burst", 
+            price: 2599, 
+            originalPrice: 3099,
+            image: "p2-264870.jpg", 
+            description: "A vibrant and energetic scent with a burst of citrus, ideal for those who embrace life with enthusiasm and positivity.",
+            category: "Energetic Citrus",
+            topNotes: "Orange, Grapefruit, Tangerine",
+            heartNotes: "Neroli, Petitgrain",
+            baseNotes: "Amber, Musk",
+            perfectFor: "Morning & Energizing"
+        },
+        { 
+            id: 11, 
+            name: "Mysterious Enigma", 
+            price: 2699, 
+            originalPrice: 3199,
+            image: "3.jpg", 
+            description: "A mysterious and alluring fragrance with deep, rich notes, perfect for captivating attention and leaving an unforgettable impression.",
+            category: "Mysterious Oriental",
+            topNotes: "Rose, Oud",
+            heartNotes: "Jasmine, Amber",
+            baseNotes: "Sandalwood, Musk, Vetiver",
+            perfectFor: "Evening & Seduction"
+        },
+        { 
+            id: 12, 
+            name: "Classic Elegance", 
+            price: 2799, 
+            originalPrice: 3299,
+            image: "p3-50725-325527.jpg", 
+            description: "A classic and timeless aroma, embodying pure elegance and sophistication for any occasion, standing the test of time.",
+            category: "Classic Timeless",
+            topNotes: "Lavender, Bergamot",
+            heartNotes: "Rose, Iris",
+            baseNotes: "Sandalwood, Patchouli, Amber",
+            perfectFor: "All Occasions"
+        },
+        { 
+            id: 13, 
+            name: "Modern Chic", 
+            price: 2899, 
+            originalPrice: 3399,
+            image: "p13-6310591.jpg", 
+            description: "A modern and chic fragrance with a hint of spice, perfect for the contemporary individual who values style and innovation.",
+            category: "Modern Oriental",
+            topNotes: "Pink Pepper, Cardamom",
+            heartNotes: "Cinnamon, Clove",
+            baseNotes: "Amber, Vanilla, Musk",
+            perfectFor: "Contemporary & Trendy"
+        },
+        { 
+            id: 14, 
+            name: "Summer Splash", 
+            price: 2999, 
+            originalPrice: 3599,
+            image: "p14bowska-8361484.jpg", 
+            description: "A refreshing and clean scent, perfect for a summer day, evoking feelings of joy and freedom with every spritz.",
+            category: "Fresh & Clean",
+            topNotes: "Coconut, Pineapple",
+            heartNotes: "Aquatic Notes, Peach",
+            baseNotes: "Musk, Sandalwood",
+            perfectFor: "Summer & Beach Days"
+        },
+        { 
+            id: 15, 
+            name: "Luxury Opulent", 
+            price: 3099, 
+            originalPrice: 3799,
+            image: "p15-33109913.jpg", 
+            description: "A luxurious and opulent fragrance with a long-lasting trail, designed for those who appreciate the finer things in life.",
+            category: "Luxury Prestige",
+            topNotes: "Saffron, Rose",
+            heartNotes: "Oud, Jasmine",
+            baseNotes: "Sandalwood, Amber, Musk",
+            perfectFor: "Premium & Luxury"
+        },
+        { 
+            id: 16, 
+            name: "Sweet Woody", 
+            price: 3199, 
+            originalPrice: 3899,
+            image: "8.jpg", 
+            description: "A captivating blend of sweet and woody notes, perfect for creating unforgettable memories and leaving a lasting impression.",
+            category: "Sweet Wood",
+            topNotes: "Caramel, Vanilla",
+            heartNotes: "Amber, Tonka",
+            baseNotes: "Cedarwood, Sandalwood",
+            perfectFor: "Evening & Romance"
+        },
+        { 
+            id: 17, 
+            name: "Green Vitality", 
+            price: 3299, 
+            originalPrice: 3999,
+            image: "9.jpg", 
+            description: "An invigorating and uplifting scent with green accords, ideal for energizing your spirit and boosting your confidence.",
+            category: "Fresh Green",
+            topNotes: "Galbanum, Green Tea",
+            heartNotes: "Herbs, Geranium",
+            baseNotes: "Vetiver, Musk",
+            perfectFor: "Daytime & Energizing"
+        },
+        { 
+            id: 18, 
+            name: "Sensual Warmth", 
+            price: 3399, 
+            originalPrice: 4099,
+            image: "pe10-965730.jpg", 
+            description: "A sensual and warm fragrance, ideal for romantic evenings and intimate moments that create chemistry and connection.",
+            category: "Sensual Oriental",
+            topNotes: "Saffron, Pepper",
+            heartNotes: "Amber, Vanilla",
+            baseNotes: "Musk, Sandalwood, Patchouli",
+            perfectFor: "Romantic & Intimate"
+        },
+        { 
+            id: 19, 
+            name: "Unique Statement", 
+            price: 3499, 
+            originalPrice: 4199,
+            image: "16b-o-phuc-34482444-11927264.jpg", 
+            description: "A unique and distinctive aroma with a touch of the unexpected, perfect for making a bold statement and standing out from the crowd.",
+            category: "Unique Avant-Garde",
+            topNotes: "Bergamot, Black Currant",
+            heartNotes: "Iris, Violet",
+            baseNotes: "Patchouli, Leather, Amber",
+            perfectFor: "Artistic & Bold"
+        },
+        { 
+            id: 20, 
+            name: "Powerful Legacy", 
+            price: 3599, 
+            originalPrice: 4299,
+            image: "p208625543.jpg", 
+            description: "A powerful and memorable fragrance that leaves a statement, designed for those who dare to stand out and create their own legacy.",
+            category: "Powerful Statement",
+            topNotes: "Cinnamon, Saffron",
+            heartNotes: "Oud, Amber",
+            baseNotes: "Sandalwood, Musk, Vetiver",
+            perfectFor: "Confident & Powerful"
+        }
+    ];
 
-  shopButtons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      const price = parseInt(button.getAttribute("data-price"));
-      const card = button.closest(".product-card");
-      const image = card.querySelector("img").getAttribute("src");
-      const name = card.querySelector("img").getAttribute("alt");
+    let currentProduct = null;
 
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ name, price, image });
-      localStorage.setItem("cart", JSON.stringify(cart));
+    function openProductModal(productId) {
+        const product = productsData.find(p => p.id === productId);
+        
+        if (product) {
+            currentProduct = product;
+            
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalName').textContent = product.name;
+            document.getElementById('modalCategory').textContent = product.category;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalPrice').textContent = `₹${product.price}`;
+            document.getElementById('modalOriginalPrice').textContent = `₹${product.originalPrice}`;
+            document.getElementById('modalRating').textContent = `(${250 + productId * 15} Reviews)`;
+            document.getElementById('modalTopNotes').textContent = product.topNotes;
+            document.getElementById('modalHeartNotes').textContent = product.heartNotes;
+            document.getElementById('modalBaseNotes').textContent = product.baseNotes;
+            document.getElementById('modalPerfectFor').textContent = product.perfectFor;
 
-      window.location.href = "cart.html";
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Set up modal buttons
+            document.getElementById('modalAddToCart').onclick = () => {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cart.push({ 
+                    name: product.name, 
+                    price: product.price, 
+                    image: product.image,
+                    id: product.id 
+                });
+                localStorage.setItem("cart", JSON.stringify(cart));
+                showNotification(`${product.name} added to cart!`, 'success');
+                closeProductModal();
+                setTimeout(() => window.location.href = 'cart.html', 1500);
+            };
+
+            document.getElementById('modalViewDetails').onclick = () => {
+                window.location.href = `detail.html?id=${product.id}`;
+            };
+        }
+    }
+
+    function closeProductModal() {
+        document.getElementById('productModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function openFullscreenImage() {
+        if (currentProduct) {
+            document.getElementById('fullscreenImage').src = currentProduct.image;
+            document.getElementById('fullscreenProductName').textContent = currentProduct.name;
+            document.getElementById('fullscreenProductPrice').textContent = `₹${currentProduct.price}`;
+            
+            document.getElementById('fullscreenModal').classList.add('active');
+            
+            // Close the product modal when opening fullscreen
+            closeProductModal();
+        }
+    }
+
+    function closeFullscreenImage() {
+        document.getElementById('fullscreenModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+        currentProduct = null;
+    }
+
+    function showNotification(text, type = 'success') {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #d71e06, #ff8c3a);
+            color: white;
+            padding: 18px 28px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(215, 30, 6, 0.3);
+            z-index: 10000;
+            font-weight: 600;
+            animation: slideInRight 0.5s ease-out;
+        `;
+        notification.innerHTML = `<i class="fas fa-check-circle"></i> ${text}`;
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('productModal').addEventListener('click', (e) => {
+        if (e.target.id === 'productModal') {
+            closeProductModal();
+        }
     });
-  });
 
- detailButtons.forEach(button => {
-  button.addEventListener("click", (e) => {
-    e.stopPropagation(); // Prevent triggering the onclick if needed
-    const productId = button.getAttribute("data-id");
-    window.location.href = `product-detail.html?id=${productId}`; // Corrected: Use backticks for template literals
-  });
-});
-detailButtons.forEach(button => {
-  button.addEventListener("click", (e) => {
-    e.stopPropagation(); // Prevent triggering the onclick if needed
-    const productId = button.getAttribute("data-id");
-    window.location.href = `product-detail.html?id=${productId}`; // Corrected: Use backticks for template literals
-  });
-});
+    // Close fullscreen modal when clicking outside
+    document.getElementById('fullscreenModal').addEventListener('click', (e) => {
+        if (e.target.id === 'fullscreenModal') {
+            closeFullscreenImage();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (document.getElementById('fullscreenModal').classList.contains('active')) {
+                closeFullscreenImage();
+            } else if (document.getElementById('productModal').classList.contains('active')) {
+                closeProductModal();
+            }
+        }
+    });
+
+    // Existing shop button functionality
+    const shopButtons = document.querySelectorAll(".shop-btn");
+    shopButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const price = parseInt(button.getAttribute("data-price"));
+            const card = button.closest(".product-card");
+            const image = card.querySelector("img").getAttribute("src");
+            const name = card.querySelector("img").getAttribute("alt");
+
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({ name, price, image });
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            showNotification(`${name} added to cart!`, 'success');
+            setTimeout(() => window.location.href = "cart.html", 1500);
+        });
+    });
 </script>
 
 

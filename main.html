@@ -53,9 +53,19 @@
             <a href="products.html" id="cart-icon-link" class="cart-icon">
             <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:30px;height:30px;vertical-align:center;">
             </a>
-            <!-- Existing buttons, now with IDs for easier manipulation -->
-            <a href="sign.html" id="signup-btn-link"><button class="nav-btn">Sign Up</button></a>
-            <a href="login.html" id="login-btn-link"><button class="nav-btn" >Login</button></a>
+            <!-- Enhanced auth buttons with modern design -->
+            <a href="sign.html" id="signup-btn-link" class="auth-btn-link">
+                <button class="auth-btn signup-btn">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Sign Up</span>
+                </button>
+            </a>
+            <a href="login.html" id="login-btn-link" class="auth-btn-link">
+                <button class="auth-btn login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </button>
+            </a>
             <!-- Profile button will be dynamically added here by JavaScript -->
         </div>
         <div class="navbar-menu-toggle">
@@ -275,7 +285,13 @@
                 profileBtnLink = document.createElement('a');
                 profileBtnLink.href = 'acc.html';
                 profileBtnLink.id = 'profile-btn-link';
-                profileBtnLink.innerHTML = `<button class="nav-btn"><i class="fa-solid fa-user"></i> Profile</button>`;
+                profileBtnLink.className = 'auth-btn-link';
+                profileBtnLink.innerHTML = `
+                    <button class="auth-btn profile-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </button>
+                `;
                 navbarActions.appendChild(profileBtnLink);
             }
             if (sideProfileLink) sideProfileLink.style.display = 'block'; // Show in side navbar

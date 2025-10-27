@@ -3,27 +3,437 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login Page</title>
+        <title>LUMORA - Login</title>
         <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
-        <link rel="stylesheet" href="login.css">
-        </head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Poppins', sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+                overflow-x: hidden;
+            }
+
+            .login-container {
+                display: flex;
+                max-width: 900px;
+                width: 100%;
+                background: white;
+                border-radius: 20px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+                overflow: hidden;
+                animation: slideUp 0.8s ease-out;
+            }
+
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .login-left {
+                flex: 1;
+                background: linear-gradient(135deg, #d71e06, #ff8c3a);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 60px 40px;
+                color: white;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .login-left::before {
+                content: '';
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+                animation: float 20s linear infinite;
+            }
+
+            @keyframes float {
+                from {
+                    transform: translate(-50px, -50px);
+                }
+                to {
+                    transform: translate(50px, 50px);
+                }
+            }
+
+            .brand-logo {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 30px;
+                z-index: 2;
+                position: relative;
+            }
+
+            .brand-logo img {
+                width: 50px;
+                height: 50px;
+                filter: brightness(0) invert(1);
+            }
+
+            .brand-title {
+                font-size: 3rem;
+                font-weight: 700;
+                letter-spacing: 2px;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            .welcome-text {
+                font-size: 1.5rem;
+                font-weight: 300;
+                margin-bottom: 20px;
+                z-index: 2;
+                position: relative;
+            }
+
+            .welcome-desc {
+                font-size: 1rem;
+                opacity: 0.9;
+                line-height: 1.6;
+                z-index: 2;
+                position: relative;
+            }
+
+            .login-right {
+                flex: 1;
+                padding: 60px 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .login-header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .login-title {
+                font-size: 2.5rem;
+                color: #1d2321;
+                font-weight: 700;
+                margin-bottom: 10px;
+                background: linear-gradient(135deg, #d71e06, #ff8c3a);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .login-subtitle {
+                color: #666;
+                font-size: 1rem;
+            }
+
+            .form-group {
+                position: relative;
+                margin-bottom: 25px;
+            }
+
+            .form-group label {
+                position: absolute;
+                top: -8px;
+                left: 15px;
+                background: white;
+                padding: 0 8px;
+                font-size: 0.85rem;
+                color: #d71e06;
+                font-weight: 600;
+                z-index: 1;
+            }
+
+            .form-input {
+                width: 100%;
+                padding: 18px 50px 18px 20px;
+                border: 2px solid #e1e5e9;
+                border-radius: 12px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                background: #f8f9fa;
+            }
+
+            .form-input:focus {
+                outline: none;
+                border-color: #d71e06;
+                background: white;
+                box-shadow: 0 0 0 3px rgba(215, 30, 6, 0.1);
+            }
+
+            .form-input::placeholder {
+                color: #aaa;
+            }
+
+            .input-icon {
+                position: absolute;
+                right: 18px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #999;
+                font-size: 1.2rem;
+                cursor: pointer;
+                transition: color 0.3s ease;
+            }
+
+            .input-icon:hover {
+                color: #d71e06;
+            }
+
+            .login-btn {
+                width: 100%;
+                padding: 18px;
+                background: linear-gradient(135deg, #d71e06, #ff8c3a);
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin-bottom: 25px;
+                box-shadow: 0 8px 20px rgba(215, 30, 6, 0.3);
+            }
+
+            .login-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(215, 30, 6, 0.4);
+            }
+
+            .login-btn:active {
+                transform: translateY(0);
+            }
+
+            .forgot-password {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .forgot-password a {
+                color: #d71e06;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+
+            .forgot-password a:hover {
+                color: #ff8c3a;
+            }
+
+            .signup-link {
+                text-align: center;
+                color: #666;
+            }
+
+            .signup-link a {
+                color: #d71e06;
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s ease;
+            }
+
+            .signup-link a:hover {
+                color: #ff8c3a;
+            }
+
+            .social-login {
+                margin-top: 30px;
+                text-align: center;
+            }
+
+            .social-text {
+                color: #999;
+                margin-bottom: 20px;
+                position: relative;
+            }
+
+            .social-text::before,
+            .social-text::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                width: 35%;
+                height: 1px;
+                background: #e1e5e9;
+            }
+
+            .social-text::before {
+                left: 0;
+            }
+
+            .social-text::after {
+                right: 0;
+            }
+
+            .social-buttons {
+                display: flex;
+                gap: 15px;
+            }
+
+            .social-btn {
+                flex: 1;
+                padding: 12px;
+                border: 2px solid #e1e5e9;
+                border-radius: 10px;
+                background: white;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 1.2rem;
+            }
+
+            .social-btn:hover {
+                border-color: #d71e06;
+                transform: translateY(-2px);
+            }
+
+            .google {
+                color: #db4437;
+            }
+
+            .facebook {
+                color: #3b5998;
+            }
+
+            .twitter {
+                color: #1da1f2;
+            }
+
+            @media (max-width: 768px) {
+                .login-container {
+                    flex-direction: column;
+                    max-width: 400px;
+                }
+
+                .login-left {
+                    padding: 40px 30px;
+                }
+
+                .login-right {
+                    padding: 40px 30px;
+                }
+
+                .brand-title {
+                    font-size: 2rem;
+                }
+
+                .login-title {
+                    font-size: 2rem;
+                }
+
+                .welcome-text {
+                    font-size: 1.2rem;
+                }
+            }
+
+            .loading {
+                position: relative;
+                overflow: hidden;
+            }
+
+            .loading::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                animation: loading 1.5s infinite;
+            }
+
+            @keyframes loading {
+                0% {
+                    left: -100%;
+                }
+                100% {
+                    left: 100%;
+                }
+            }
+        </style>
+    </head>
     <body>
-        <form id="loginForm">
-            <h1 style="color: rgb(58, 58, 74);"><i>LOGIN</i></h1>
-            <div style="position: relative; display: flex; align-items: center; margin-bottom: 16px;">
-                <input type="text" id="username" name="username" placeholder="Username" style="padding: 5px 30px 5px 5px; border-radius: 5px; border: 1px solid #ccc; width: 100%;" required>
-                <img src="https://cdn-icons-png.flaticon.com/128/666/666201.png" alt="User Icon" style="position: absolute; right: 8px; width: 20px; height: 20px; opacity: 0.7; pointer-events: none;">
+        <div class="login-container">
+            <div class="login-left">
+                <div class="brand-logo">
+                    <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="LUMORA">
+                    <h1 class="brand-title">LUMORA</h1>
+                </div>
+                <h2 class="welcome-text">Welcome Back!</h2>
+                <p class="welcome-desc">
+                    Discover your signature scent from our curated collection of premium fragrances. 
+                    Login to explore exclusive perfumes and find your perfect match.
+                </p>
             </div>
-            </br>
-            <div style="position: relative; display: flex; align-items: center;">
-                <input type="password" id="password" name="password" placeholder="Password" style="padding: 5px 30px 5px 5px; border-radius: 5px; border: 1px solid #ccc; width: 100%;" required>
-                <img src="https://cdn-icons-png.flaticon.com/128/709/709612.png" id="togglePassword" alt="Show Password" title="Show Password" style="position: absolute; right: 8px; width: 22px; height: 22px; cursor: pointer; opacity: 0.7;">
+            
+            <div class="login-right">
+                <div class="login-header">
+                    <h2 class="login-title">Login</h2>
+                    <p class="login-subtitle">Please sign in to your account</p>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-input" placeholder="Enter your username" required>
+                        <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                        <i class="fas fa-eye input-icon" id="togglePassword"></i>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        <span id="loginText">Sign In</span>
+                        <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                    </button>
+                </form>
+                
+                <div class="forgot-password">
+                    <a href="#">Forgot your password?</a>
+                </div>
+                
+                <div class="social-login">
+                    <p class="social-text">Or continue with</p>
+                    <div class="social-buttons">
+                        <buttonbutton class="social-btn google" title="Continue with Google" aria-label="Continue with Google">
+                            <i class="fab fa-google"></i>
+                        </button>
+                        <button class="social-btn facebook" title="Continue with Facebook" aria-label="Continue with Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-btn twitter" title="Continue with Twitter" aria-label="Continue with Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="signup-link">
+                    <p>Don't have an account? <a href="sign.html">Sign Up</a></p>
+                </div>
             </div>
-            <br><br>
-            <button type="submit" style="color: rgb(15, 15, 17); background-color: #9786a3; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Login</button>
-            </br>
-            <p>No Account Yet? <a href="sign.html"><u>Sign Up</u></a></p>
-        </form>
+        </div>
 
         <script src="index.js" defer></script> <script>
             // Dummy credentials
