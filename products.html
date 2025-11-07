@@ -461,6 +461,39 @@
                 max-height: 350px;
             }
         }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 11000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.4s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .notification.error {
+            background: #dc3545;
+        }
+
+        .notification.info {
+            background: #007bff;
+        }
+
+        .notification.warning {
+            background: #ffc107;
+        }
     </style>
 </head>
 <body>
@@ -603,91 +636,13 @@
         </div>
     </div>
 
-    <div class="all-products"><section class="section">
+    <div class="all-products">
+        <section class="section">
             <h2 class="section-title">New Arrivals</h2>
-            <div class="product-grid">
-                <div class="product-card" data-product-id="1">
-                    <img src="karly-jones-4i9ef6xU738-unsplash.jpg" alt="Ocean Breeze" onclick="openProductModal(1)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="1299" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="2">
-                    <img src="birgith-roosipuu-nka_sIQpKEU-unsplash.jpg" alt="Romantic Rose" onclick="openProductModal(2)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="1499" >Buy Now →</button>
-              </div>
-                <div class="product-card" data-product-id="3">
-                    <img src="yixian-zhao-q7iZCOXGOWY-unsplash.jpg" alt="Spice of Life" onclick="openProductModal(3)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="1799" >Buy Now →</button>
-                 </div>
-                <div class="product-card" data-product-id="4">
-                    <img src="delfina-iacub-nrkgRRskOBo-unsplash.jpg" alt="Fruity Paradise" onclick="openProductModal(4)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="1999" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="5">
-                    <img src="filip-baotic-tgqnnQfq6C8-unsplash.jpg" alt="Woody Elegance" onclick="openProductModal(5)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2099" >Buy Now →</button>
-                 </div>
-                <div class="product-card" data-product-id="6">
-                    <img src="laurissi-CVz2Ove_NuI-unsplash.jpg" alt="Spring Garden" onclick="openProductModal(6)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2199" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="7">
-                    <img src="pesce-huang-mq73cWf9ZAQ-unsplash.jpg" alt="Exotic Amber" onclick="openProductModal(7)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2299" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="8">
-                    <img src="heidi-walley-m6sh2vS0Yjk-unsplash.jpg" alt="Bold Adventure" onclick="openProductModal(8)" style="cursor:pointer;" />
-                    <button class="shop-btn" data-price="2399" >Buy Now →</button>
-                 </div>
-                <div class="product-card" data-product-id="9">
-                    <img src="pexels-valeriya-965990.jpg" alt="Powder Soft" onclick="openProductModal(9)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2499" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="10">
-                    <img src="p2-264870.jpg" alt="Citrus Burst" onclick="openProductModal(10)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2599" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="11">
-                    <img src="3.jpg" alt="Mysterious Enigma" onclick="openProductModal(11)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2699" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="12">
-                    <img src="p3-50725-325527.jpg" alt="Classic Elegance" onclick="openProductModal(12)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2799" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="13">
-                    <img src="p13-6310591.jpg" alt="Modern Chic" onclick="openProductModal(13)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="2899" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="14">
-                    <img src="p14bowska-8361484.jpg" alt="Summer Splash" onclick="openProductModal(14)" style="cursor:pointer;" />
-                    <button class="shop-btn" data-price="2999" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="15">
-                    <img src="p15-33109913.jpg" alt="Luxury Opulent" onclick="openProductModal(15)" style="cursor:pointer;" />
-                    <button class="shop-btn" data-price="3099" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="16">
-                    <img src="8.jpg" alt="Sweet Woody" onclick="openProductModal(16)" style="cursor:pointer;" />
-                    <button class="shop-btn" data-price="3199" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="17">
-                    <img src="9.jpg" alt="Green Vitality" onclick="openProductModal(17)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="3299" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="18">
-                    <img src="pe10-965730.jpg" alt="Sensual Warmth" onclick="openProductModal(18)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="3399" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="19">
-                    <img src="16b-o-phuc-34482444-11927264.jpg" alt="Unique Statement" onclick="openProductModal(19)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="3499" >Buy Now →</button>
-                </div>
-                <div class="product-card" data-product-id="20">
-                    <img src="p208625543.jpg" alt="Powerful Legacy" onclick="openProductModal(20)" style="cursor:pointer;"/>
-                    <button class="shop-btn" data-price="3599" >Buy Now →</button>
-                </div>
-            </div>
-        </section></div>
+            <!-- Product grid will be rendered from productsData (products-data.js) -->
+            <div id="productGrid" class="product-grid" aria-live="polite"></div>
+        </section>
+    </div>
         <div style="display: flex; justify-content: center; gap: 20px; margin: 40px 0;">
     <a href="main.html#about-us">
         <button class="button">About Us</button>
@@ -697,402 +652,93 @@
     </a>
 </div>
 
-<script>
-    const productsData = [
-        { 
-            id: 1, 
-            name: "Ocean Breeze", 
-            price: 1299, 
-            originalPrice: 1599,
-            image: "karly-jones-4i9ef6xU738-unsplash.jpg", 
-            description: "Experience the freshness of citrus and sea salt, a perfect blend that invigorates your senses and refreshes your spirit. This vibrant fragrance captures the essence of a coastal getaway.",
-            category: "Fresh Citrus",
-            topNotes: "Bergamot, Lemon, Sea Salt",
-            heartNotes: "Aquatic Accords, White Musk",
-            baseNotes: "Cedarwood, Amber",
-            perfectFor: "Summer & Beach"
-        },
-        { 
-            id: 2, 
-            name: "Romantic Rose", 
-            price: 1499, 
-            originalPrice: 1799,
-            image: "birgith-roosipuu-nka_sIQpKEU-unsplash.jpg", 
-            description: "An elegant floral bouquet that captures the essence of blooming jasmine and delicate rose petals, perfect for romantic evenings and special occasions.",
-            category: "Floral Romance",
-            topNotes: "Pink Pepper, Mandarin",
-            heartNotes: "Jasmine, Rose, Peony",
-            baseNotes: "Sandalwood, Musk, Patchouli",
-            perfectFor: "Evening & Dates"
-        },
-        { 
-            id: 3, 
-            name: "Spice of Life", 
-            price: 1799, 
-            originalPrice: 2099,
-            image: "yixian-zhao-q7iZCOXGOWY-unsplash.jpg", 
-            description: "A warm and spicy aroma that envelops you in a cozy embrace, ideal for evening wear and intimate gatherings. The perfect balance of warmth and elegance.",
-            category: "Warm Spice",
-            topNotes: "Cinnamon, Clove, Cardamom",
-            heartNotes: "Amber, Vanilla",
-            baseNotes: "Leather, Musk, Oakmoss",
-            perfectFor: "Winter & Evening"
-        },
-        { 
-            id: 4, 
-            name: "Fruity Paradise", 
-            price: 1999, 
-            originalPrice: 2399,
-            image: "delfina-iacub-nrkgRRskOBo-unsplash.jpg", 
-            description: "A sweet and playful fragrance with fruity undertones, perfect for those who love to express their vibrant personality and zest for life.",
-            category: "Fruity Sweet",
-            topNotes: "Passion Fruit, Pear",
-            heartNotes: "Peach, Raspberry",
-            baseNotes: "Vanilla, Caramel, Amber",
-            perfectFor: "Daily Wear & Spring"
-        },
-        { 
-            id: 5, 
-            name: "Woody Elegance", 
-            price: 2099, 
-            originalPrice: 2499,
-            image: "filip-baotic-tgqnnQfq6C8-unsplash.jpg", 
-            description: "A sophisticated blend of woody notes and musk, exuding confidence and elegance for the modern individual who values quality and refinement.",
-            category: "Woody Aromatic",
-            topNotes: "Lavender, Cypress",
-            heartNotes: "Iris, Geranium",
-            baseNotes: "Cedarwood, Vetiver, Musk",
-            perfectFor: "Formal & Professional"
-        },
-        { 
-            id: 6, 
-            name: "Spring Garden", 
-            price: 2199, 
-            originalPrice: 2599,
-            image: "laurissi-CVz2Ove_NuI-unsplash.jpg", 
-            description: "A light and airy scent reminiscent of a spring garden, bringing a sense of tranquility and freshness to your day with every application.",
-            category: "Fresh Floral",
-            topNotes: "Green Apple, Lemon",
-            heartNotes: "Lilac, Lily of the Valley",
-            baseNotes: "Green Tea, Moss",
-            perfectFor: "Spring & Daytime"
-        },
-        { 
-            id: 7, 
-            name: "Exotic Amber", 
-            price: 2299, 
-            originalPrice: 2799,
-            image: "pesce-huang-mq73cWf9ZAQ-unsplash.jpg", 
-            description: "An exotic fragrance with hints of amber and vanilla, perfect for those who dare to be different and embrace their uniqueness with confidence.",
-            category: "Amber Vanilla",
-            topNotes: "Saffron, Cinnamon",
-            heartNotes: "Amber, Oud",
-            baseNotes: "Vanilla, Tonka Bean, Musk",
-            perfectFor: "Night Out & Special Events"
-        },
-        { 
-            id: 8, 
-            name: "Bold Adventure", 
-            price: 2399, 
-            originalPrice: 2899,
-            image: "heidi-walley-m6sh2vS0Yjk-unsplash.jpg", 
-            description: "A bold and confident scent with a touch of leather, designed for the fearless and adventurous spirit who dares to make a statement.",
-            category: "Leather Aromatic",
-            topNotes: "Black Pepper, Ginger",
-            heartNotes: "Leather Accord, Tobacco",
-            baseNotes: "Amber, Oud, Musk",
-            perfectFor: "Adventurous & Daring"
-        },
-        { 
-            id: 9, 
-            name: "Powder Soft", 
-            price: 2499, 
-            originalPrice: 2999,
-            image: "pexels-valeriya-965990.jpg", 
-            description: "A delicate and powdery fragrance, perfect for daily use, leaving a subtle yet lasting impression that whispers elegance.",
-            category: "Powdery Floral",
-            topNotes: "Grapefruit, Pink Pepper",
-            heartNotes: "Peony, Violet",
-            baseNotes: "Musk, Sandalwood",
-            perfectFor: "Daily Wear & Office"
-        },
-        { 
-            id: 10, 
-            name: "Citrus Burst", 
-            price: 2599, 
-            originalPrice: 3099,
-            image: "p2-264870.jpg", 
-            description: "A vibrant and energetic scent with a burst of citrus, ideal for those who embrace life with enthusiasm and positivity.",
-            category: "Energetic Citrus",
-            topNotes: "Orange, Grapefruit, Tangerine",
-            heartNotes: "Neroli, Petitgrain",
-            baseNotes: "Amber, Musk",
-            perfectFor: "Morning & Energizing"
-        },
-        { 
-            id: 11, 
-            name: "Mysterious Enigma", 
-            price: 2699, 
-            originalPrice: 3199,
-            image: "3.jpg", 
-            description: "A mysterious and alluring fragrance with deep, rich notes, perfect for captivating attention and leaving an unforgettable impression.",
-            category: "Mysterious Oriental",
-            topNotes: "Rose, Oud",
-            heartNotes: "Jasmine, Amber",
-            baseNotes: "Sandalwood, Musk, Vetiver",
-            perfectFor: "Evening & Seduction"
-        },
-        { 
-            id: 12, 
-            name: "Classic Elegance", 
-            price: 2799, 
-            originalPrice: 3299,
-            image: "p3-50725-325527.jpg", 
-            description: "A classic and timeless aroma, embodying pure elegance and sophistication for any occasion, standing the test of time.",
-            category: "Classic Timeless",
-            topNotes: "Lavender, Bergamot",
-            heartNotes: "Rose, Iris",
-            baseNotes: "Sandalwood, Patchouli, Amber",
-            perfectFor: "All Occasions"
-        },
-        { 
-            id: 13, 
-            name: "Modern Chic", 
-            price: 2899, 
-            originalPrice: 3399,
-            image: "p13-6310591.jpg", 
-            description: "A modern and chic fragrance with a hint of spice, perfect for the contemporary individual who values style and innovation.",
-            category: "Modern Oriental",
-            topNotes: "Pink Pepper, Cardamom",
-            heartNotes: "Cinnamon, Clove",
-            baseNotes: "Amber, Vanilla, Musk",
-            perfectFor: "Contemporary & Trendy"
-        },
-        { 
-            id: 14, 
-            name: "Summer Splash", 
-            price: 2999, 
-            originalPrice: 3599,
-            image: "p14bowska-8361484.jpg", 
-            description: "A refreshing and clean scent, perfect for a summer day, evoking feelings of joy and freedom with every spritz.",
-            category: "Fresh & Clean",
-            topNotes: "Coconut, Pineapple",
-            heartNotes: "Aquatic Notes, Peach",
-            baseNotes: "Musk, Sandalwood",
-            perfectFor: "Summer & Beach Days"
-        },
-        { 
-            id: 15, 
-            name: "Luxury Opulent", 
-            price: 3099, 
-            originalPrice: 3799,
-            image: "p15-33109913.jpg", 
-            description: "A luxurious and opulent fragrance with a long-lasting trail, designed for those who appreciate the finer things in life.",
-            category: "Luxury Prestige",
-            topNotes: "Saffron, Rose",
-            heartNotes: "Oud, Jasmine",
-            baseNotes: "Sandalwood, Amber, Musk",
-            perfectFor: "Premium & Luxury"
-        },
-        { 
-            id: 16, 
-            name: "Sweet Woody", 
-            price: 3199, 
-            originalPrice: 3899,
-            image: "8.jpg", 
-            description: "A captivating blend of sweet and woody notes, perfect for creating unforgettable memories and leaving a lasting impression.",
-            category: "Sweet Wood",
-            topNotes: "Caramel, Vanilla",
-            heartNotes: "Amber, Tonka",
-            baseNotes: "Cedarwood, Sandalwood",
-            perfectFor: "Evening & Romance"
-        },
-        { 
-            id: 17, 
-            name: "Green Vitality", 
-            price: 3299, 
-            originalPrice: 3999,
-            image: "9.jpg", 
-            description: "An invigorating and uplifting scent with green accords, ideal for energizing your spirit and boosting your confidence.",
-            category: "Fresh Green",
-            topNotes: "Galbanum, Green Tea",
-            heartNotes: "Herbs, Geranium",
-            baseNotes: "Vetiver, Musk",
-            perfectFor: "Daytime & Energizing"
-        },
-        { 
-            id: 18, 
-            name: "Sensual Warmth", 
-            price: 3399, 
-            originalPrice: 4099,
-            image: "pe10-965730.jpg", 
-            description: "A sensual and warm fragrance, ideal for romantic evenings and intimate moments that create chemistry and connection.",
-            category: "Sensual Oriental",
-            topNotes: "Saffron, Pepper",
-            heartNotes: "Amber, Vanilla",
-            baseNotes: "Musk, Sandalwood, Patchouli",
-            perfectFor: "Romantic & Intimate"
-        },
-        { 
-            id: 19, 
-            name: "Unique Statement", 
-            price: 3499, 
-            originalPrice: 4199,
-            image: "16b-o-phuc-34482444-11927264.jpg", 
-            description: "A unique and distinctive aroma with a touch of the unexpected, perfect for making a bold statement and standing out from the crowd.",
-            category: "Unique Avant-Garde",
-            topNotes: "Bergamot, Black Currant",
-            heartNotes: "Iris, Violet",
-            baseNotes: "Patchouli, Leather, Amber",
-            perfectFor: "Artistic & Bold"
-        },
-        { 
-            id: 20, 
-            name: "Powerful Legacy", 
-            price: 3599, 
-            originalPrice: 4299,
-            image: "p208625543.jpg", 
-            description: "A powerful and memorable fragrance that leaves a statement, designed for those who dare to stand out and create their own legacy.",
-            category: "Powerful Statement",
-            topNotes: "Cinnamon, Saffron",
-            heartNotes: "Oud, Amber",
-            baseNotes: "Sandalwood, Musk, Vetiver",
-            perfectFor: "Confident & Powerful"
+    <script src="products-data.js"></script>
+    <script>
+        // Render product grid from productsData
+        function renderProductGrid() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            const colors = ['color-1', 'color-2', 'color-3', 'color-4', 'color-5'];
+            productsData.forEach((product, index) => {
+                const card = document.createElement('div');
+                const colorClass = colors[index % colors.length];
+                card.className = `product-card ${colorClass}`;
+                card.setAttribute('data-product-id', product.id);
+
+                card.innerHTML = `
+                    <div class="card-media" role="button" tabindex="0" aria-label="Open ${escapeHtml(product.name)}">
+                        <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy">
+                        <div class="card-overlay">
+                            <div class="overlay-actions">
+                                <button class="overlay-btn add-cart" data-id="${product.id}">Buy Now &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // image click disabled to avoid interfering with Buy Now
+                // card.querySelector('.card-media').addEventListener('click', () => openProductModal(product.id));
+
+                grid.appendChild(card);
+            });
+
+            // Delegate overlay button clicks
+            grid.addEventListener('click', (e) => {
+                const addBtn = e.target.closest('.overlay-btn.add-cart');
+                const viewBtn = e.target.closest('.overlay-btn.view');
+
+                if (addBtn) {
+                    const id = parseInt(addBtn.getAttribute('data-id'));
+                    const product = productsData.find(p => p.id === id);
+                    if (product) {
+                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                        cart.push({ id: product.id, name: product.name, price: product.price, image: product.image });
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        showNotification(`${product.name} added to cart!`, 'success');
+                        setTimeout(() => window.location.href = 'cart.html', 1200);
+                    }
+                }
+
+                if (viewBtn) {
+                    // No action needed here as it's a link now
+                }
+            });
         }
-    ];
 
-    let currentProduct = null;
-
-    function openProductModal(productId) {
-        const product = productsData.find(p => p.id === productId);
-        
-        if (product) {
-            currentProduct = product;
-            
-            document.getElementById('modalImage').src = product.image;
-            document.getElementById('modalName').textContent = product.name;
-            document.getElementById('modalCategory').textContent = product.category;
-            document.getElementById('modalDescription').textContent = product.description;
-            document.getElementById('modalPrice').textContent = `₹${product.price}`;
-            document.getElementById('modalOriginalPrice').textContent = `₹${product.originalPrice}`;
-            document.getElementById('modalRating').textContent = `(${250 + productId * 15} Reviews)`;
-            document.getElementById('modalTopNotes').textContent = product.topNotes;
-            document.getElementById('modalHeartNotes').textContent = product.heartNotes;
-            document.getElementById('modalBaseNotes').textContent = product.baseNotes;
-            document.getElementById('modalPerfectFor').textContent = product.perfectFor;
-
-            document.getElementById('productModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-
-            // Set up modal buttons
-            document.getElementById('modalAddToCart').onclick = () => {
-                const cart = JSON.parse(localStorage.getItem("cart")) || [];
-                cart.push({ 
-                    name: product.name, 
-                    price: product.price, 
-                    image: product.image,
-                    id: product.id 
-                });
-                localStorage.setItem("cart", JSON.stringify(cart));
-                showNotification(`${product.name} added to cart!`, 'success');
-                closeProductModal();
-                setTimeout(() => window.location.href = 'cart.html', 1500);
-            };
-
-            document.getElementById('modalViewDetails').onclick = () => {
-                window.location.href = `detail.html?id=${product.id}`;
-            };
+        // small helper to avoid XSS in injected HTML
+        function escapeHtml(text){
+            return String(text).replace(/[&<>"']/g, function (m) { return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"})[m]; });
         }
-    }
 
-    function closeProductModal() {
-        document.getElementById('productModal').classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
+        // Shows a notification pop-up
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
 
-    function openFullscreenImage() {
-        if (currentProduct) {
-            document.getElementById('fullscreenImage').src = currentProduct.image;
-            document.getElementById('fullscreenProductName').textContent = currentProduct.name;
-            document.getElementById('fullscreenProductPrice').textContent = `₹${currentProduct.price}`;
-            
-            document.getElementById('fullscreenModal').classList.add('active');
-            
-            // Close the product modal when opening fullscreen
-            closeProductModal();
+            // Animate in
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            // Animate out and remove after a delay
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 2500);
         }
-    }
 
-    function closeFullscreenImage() {
-        document.getElementById('fullscreenModal').classList.remove('active');
-        document.body.style.overflow = 'auto';
-        currentProduct = null;
-    }
-
-    function showNotification(text, type = 'success') {
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #d71e06, #ff8c3a);
-            color: white;
-            padding: 18px 28px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(215, 30, 6, 0.3);
-            z-index: 10000;
-            font-weight: 600;
-            animation: slideInRight 0.5s ease-out;
-        `;
-        notification.innerHTML = `<i class="fas fa-check-circle"></i> ${text}`;
-        document.body.appendChild(notification);
-        setTimeout(() => notification.remove(), 3000);
-    }
-
-    // Close modal when clicking outside
-    document.getElementById('productModal').addEventListener('click', (e) => {
-        if (e.target.id === 'productModal') {
-            closeProductModal();
-        }
-    });
-
-    // Close fullscreen modal when clicking outside
-    document.getElementById('fullscreenModal').addEventListener('click', (e) => {
-        if (e.target.id === 'fullscreenModal') {
-            closeFullscreenImage();
-        }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            if (document.getElementById('fullscreenModal').classList.contains('active')) {
-                closeFullscreenImage();
-            } else if (document.getElementById('productModal').classList.contains('active')) {
-                closeProductModal();
-            }
-        }
-    });
-
-    // Existing shop button functionality
-    const shopButtons = document.querySelectorAll(".shop-btn");
-    shopButtons.forEach((button) => {
-        button.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const price = parseInt(button.getAttribute("data-price"));
-            const card = button.closest(".product-card");
-            const image = card.querySelector("img").getAttribute("src");
-            const name = card.querySelector("img").getAttribute("alt");
-
-            const cart = JSON.parse(localStorage.getItem("cart")) || [];
-            cart.push({ name, price, image });
-            localStorage.setItem("cart", JSON.stringify(cart));
-
-            showNotification(`${name} added to cart!`, 'success');
-            setTimeout(() => window.location.href = "cart.html", 1500);
+        // render when DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProductGrid();
         });
-    });
-</script>
+    </script>
 
 
 </body>
