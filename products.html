@@ -509,10 +509,14 @@
             <p><a href="main.html#about-us"><i>About Us</i></a></p>
             <p><a href="main.html#contact-us"><i>Contact Us</i></a></p>
         </div>
-        <div class="navbar-actions">
-          <a href="sign.html"><button class="nav-btn">Sign Up</button></a>
-            <a href="login.html"><button class="nav-btn" >Login</button></a>
-        </div>
+                <div class="navbar-actions">
+                    <a href="cart.html" id="cart-icon-link" class="cart-icon" aria-label="Open cart">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:24px;height:24px;vertical-align:middle;">
+                        <span id="navCartCount" class="cart-count">0</span>
+                    </a>
+                    <a href="sign.html" class="auth-btn login-btn"><i class="fas fa-user-plus" aria-hidden="true"></i><span>Sign Up</span></a>
+                    <a href="login.html" class="auth-btn login-btn"><i class="fas fa-sign-in-alt" aria-hidden="true"></i><span>Login</span></a>
+                </div>
 
     </nav>
     <!-- sidenavbar -->
@@ -653,6 +657,7 @@
 </div>
 
     <script src="products-data.js"></script>
+    <script src="cart.js"></script>
     <script>
         // Render product grid from productsData
         function renderProductGrid() {
@@ -661,47 +666,47 @@
 
             const colors = ['color-1', 'color-2', 'color-3', 'color-4', 'color-5'];
             productsData.forEach((product, index) => {
-                const card = document.createElement('div');
-                const colorClass = colors[index % colors.length];
-                card.className = `product-card ${colorClass}`;
-                card.setAttribute('data-product-id', product.id);
+                    const card = document.createElement('div');
+                    const colorClass = colors[index % colors.length];
+                    card.className = `product-card ${colorClass}`;
+                    card.setAttribute('data-product-id', product.id);
 
-                card.innerHTML = `
-                    <div class="card-media" role="button" tabindex="0" aria-label="Open ${escapeHtml(product.name)}">
-                        <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy">
-                        <div class="card-overlay">
-                            <div class="overlay-actions">
-                                <button class="overlay-btn add-cart" data-id="${product.id}">Buy Now &rarr;</button>
+                    card.innerHTML = `
+                        <div class="card-media" role="button" tabindex="0" aria-label="Open ${escapeHtml(product.name)}">
+                            <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy">
+                            <div class="card-overlay">
+                                <div class="overlay-price">₹${product.price}</div>
+                                <div class="overlay-actions">
+                                    <button class="overlay-btn add-cart" data-id="${product.id}">Buy Now →</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                        <button class="shop-btn" onclick="location.href='product-inspect.html?id=${product.id}'" data-price="${product.price}">Shop Now →</button>
+                    `;
 
-                // image click disabled to avoid interfering with Buy Now
-                // card.querySelector('.card-media').addEventListener('click', () => openProductModal(product.id));
-
-                grid.appendChild(card);
+                    grid.appendChild(card);
             });
 
-            // Delegate overlay button clicks
+            // Delegate overlay Buy Now clicks (adds to cart and redirects)
             grid.addEventListener('click', (e) => {
                 const addBtn = e.target.closest('.overlay-btn.add-cart');
-                const viewBtn = e.target.closest('.overlay-btn.view');
-
                 if (addBtn) {
                     const id = parseInt(addBtn.getAttribute('data-id'));
                     const product = productsData.find(p => p.id === id);
                     if (product) {
-                        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                        cart.push({ id: product.id, name: product.name, price: product.price, image: product.image });
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        showNotification(`${product.name} added to cart!`, 'success');
-                        setTimeout(() => window.location.href = 'cart.html', 1200);
+                        if (window.LUMORA_CART && typeof LUMORA_CART.addItem === 'function') {
+                            LUMORA_CART.addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
+                            LUMORA_CART.bumpCartIcon();
+                            showNotification(`${product.name} added to cart!`, 'success');
+                            setTimeout(() => window.location.href = 'cart.html', 900);
+                        } else {
+                            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                            cart.push({ id: product.id, name: product.name, price: product.price, image: product.image });
+                            localStorage.setItem('cart', JSON.stringify(cart));
+                            showNotification(`${product.name} added to cart!`, 'success');
+                            setTimeout(() => window.location.href = 'cart.html', 900);
+                        }
                     }
-                }
-
-                if (viewBtn) {
-                    // No action needed here as it's a link now
                 }
             });
         }
@@ -737,6 +742,16 @@
         // render when DOM ready
         document.addEventListener('DOMContentLoaded', () => {
             renderProductGrid();
+            if (window.LUMORA_CART && typeof LUMORA_CART.updateBadges === 'function') {
+                LUMORA_CART.updateBadges();
+            } else {
+                // fallback: update nav badge from localStorage
+                const countEl = document.getElementById('navCartCount');
+                if (countEl) {
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    countEl.textContent = cart.length || 0;
+                }
+            }
         });
     </script>
 

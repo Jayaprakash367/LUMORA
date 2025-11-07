@@ -55,10 +55,9 @@
             </a>
             <!-- Enhanced auth buttons with modern design -->
             <a href="sign.html" id="signup-btn-link" class="auth-btn-link">
-                <button class="auth-btn signup-btn">
+                <button class="auth-btn login-btn">
                     <i class="fas fa-user-plus"></i>
-                    <span>Sign Up</span>    
-                    
+                    <span>Sign Up</span>
                 </button>
             </a>
             <a href="login.html" id="login-btn-link" class="auth-btn-link">
@@ -308,6 +307,13 @@
             if (sideProfileLink) sideProfileLink.style.display = 'none'; // Hide in side navbar
         }
     });
+</script>
+<!-- Load cart helper and initialize badge -->
+<script>
+    (function(){
+        var s = document.createElement('script'); s.src = 'cart.js'; s.onload = function(){ if(window.LUMORA_CART && typeof LUMORA_CART.updateBadges === 'function') LUMORA_CART.updateBadges(); };
+        document.head.appendChild(s);
+    })();
 </script>
 </body>
 

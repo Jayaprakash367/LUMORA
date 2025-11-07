@@ -1002,8 +1002,8 @@ p {
     display: none;
 }
 
-.product-card:hover .overlay-actions {
-    display: none;
+    .product-card:hover .overlay-actions {
+    display: flex;
 }
 
 .product-card:hover .overlay-title {

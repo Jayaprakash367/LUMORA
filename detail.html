@@ -415,8 +415,12 @@
             <p><a href="main.html#contact-us"><i>Contact Us</i></a></p>
         </div>
         <div class="navbar-actions">
-            <a href="sign.html"><button class="nav-btn">Sign Up</button></a>
-            <a href="login.html"><button class="nav-btn" >Login</button></a>
+            <a href="cart.html" id="cart-icon-link" class="cart-icon" aria-label="Open cart">
+                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:24px;height:24px;vertical-align:middle;">
+                <span id="navCartCount" class="cart-count">0</span>
+            </a>
+            <a href="sign.html" class="auth-btn login-btn"><i class="fas fa-user-plus"></i><span>Sign Up</span></a>
+            <a href="login.html" class="auth-btn login-btn"><i class="fas fa-sign-in-alt"></i><span>Login</span></a>
         </div>
     </nav>
 
@@ -555,6 +559,7 @@
         </div>
     </div>
 
+    <script src="cart.js"></script>
     <script>
         const productsData = [
             { 
@@ -846,25 +851,22 @@
                 const addToCartBtn = document.getElementById("add-to-cart-btn");
                 addToCartBtn.addEventListener("click", () => {
                     const quantity = parseInt(document.getElementById("quantity").value) || 1;
-                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-                    
-                    for (let i = 0; i < quantity; i++) {
-                        cart.push({ 
-                            name: product.name, 
-                            price: product.price, 
-                            image: product.image,
-                            id: product.id 
-                        });
+                    if (window.LUMORA_CART && typeof LUMORA_CART.addItem === 'function') {
+                        for (let i = 0; i < quantity; i++) {
+                            LUMORA_CART.addItem({ name: product.name, price: product.price, image: product.image, id: product.id });
+                        }
+                        LUMORA_CART.bumpCartIcon();
+                        showAddToCartSuccess(quantity);
+                        setTimeout(() => { window.location.href = 'cart.html'; }, 1500);
+                    } else {
+                        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        for (let i = 0; i < quantity; i++) {
+                            cart.push({ name: product.name, price: product.price, image: product.image, id: product.id });
+                        }
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        showAddToCartSuccess(quantity);
+                        setTimeout(() => { window.location.href = 'cart.html'; }, 1500);
                     }
-                    
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    
-                    // Show success message
-                    showAddToCartSuccess(quantity);
-                    
-                    setTimeout(() => {
-                        window.location.href = "cart.html";
-                    }, 1500);
                 });
 
                 // Wishlist functionality
@@ -970,6 +972,16 @@
             }
         `;
         document.head.appendChild(style);
+        // initialize cart badge
+        if (window.LUMORA_CART && typeof LUMORA_CART.updateBadges === 'function') {
+            LUMORA_CART.updateBadges();
+        } else {
+            const countEl = document.getElementById('navCartCount');
+            if (countEl) {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                countEl.textContent = cart.length || 0;
+            }
+        }
     </script>
 </body>
 </html>

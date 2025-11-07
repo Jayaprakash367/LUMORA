@@ -128,12 +128,13 @@
             <p><a href="main.html#contact-us"><i>Contact us</i></a></p>
         </div>
         <div class="navbar-actions">
-            <a href="products.html" id="cart-icon-link">
-                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:30px;height:30px;vertical-align:center;">
+            <a href="cart.html" id="cart-icon-link" class="cart-icon" aria-label="Open cart">
+                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:24px;height:24px;vertical-align:middle;">
+                <span id="navCartCount" class="cart-count">0</span>
             </a>
             <!-- Existing buttons, now with IDs for easier manipulation -->
-            <a href="sign.html" id="signup-btn-link"><button class="nav-btn">Sign Up</button></a>
-            <a href="login.html" id="login-btn-link"><button class="nav-btn" >Login</button></a>
+            <a href="sign.html" id="signup-btn-link" class="auth-btn login-btn"><i class="fas fa-user-plus"></i><span>Sign Up</span></a>
+            <a href="login.html" id="login-btn-link" class="auth-btn login-btn"><i class="fas fa-sign-in-alt"></i><span>Login</span></a>
             <!-- Profile button will be dynamically added here by JavaScript -->
         </div>
         <div class="navbar-menu-toggle">
@@ -229,6 +230,13 @@
                 }
             }
         });
+    </script>
+    <script>
+        // Load cart helper and initialize badge
+        (function(){
+            var s = document.createElement('script'); s.src = 'cart.js'; s.onload = function(){ if(window.LUMORA_CART && typeof LUMORA_CART.updateBadges === 'function') LUMORA_CART.updateBadges(); };
+            document.head.appendChild(s);
+        })();
     </script>
 </body>
 </html>
