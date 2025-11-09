@@ -18,18 +18,46 @@
     const count = getCount();
     const nav = document.getElementById('navCartCount');
     const top = document.getElementById('topCartCount');
-    if(nav) nav.textContent = count;
-    if(top) top.textContent = count;
+    // update all known badge elements
+    const badges = Array.from(document.querySelectorAll('#navCartCount, .cart-count'));
+    if(nav && !badges.includes(nav)) badges.push(nav);
+    if(top && !badges.includes(top)) badges.push(top);
+    badges.forEach(b => {
+      try {
+        b.textContent = count;
+        // Make screen readers announce changes
+        b.setAttribute('aria-live', 'polite');
+        b.setAttribute('role', 'status');
+      } catch(e){}
+    });
+
+    // update cart anchor aria-labels for better accessibility
+    const anchors = document.querySelectorAll('.cart-icon');
+    anchors.forEach(a => {
+      try {
+        const label = count === 1 ? `Open cart, 1 item` : `Open cart, ${count} items`;
+        a.setAttribute('aria-label', label);
+      } catch(e){}
+    });
   }
 
   function bumpCartIcon(){
     const anchors = document.querySelectorAll('.cart-icon');
     anchors.forEach(a => {
+      // add bump class to anchor
       a.classList.remove('cart-bump');
+      // also target svg inside, if present, for a subtle pop
+      const svg = a.querySelector('.cart-svg');
+      if (svg) svg.classList.remove('cart-bump');
       // force reflow
       void a.offsetWidth;
       a.classList.add('cart-bump');
-      setTimeout(() => a.classList.remove('cart-bump'), 700);
+      if (svg) svg.classList.add('cart-bump');
+      // cleanup
+      setTimeout(() => {
+        try { a.classList.remove('cart-bump'); } catch(e){}
+        try { if (svg) svg.classList.remove('cart-bump'); } catch(e){}
+      }, 700);
     });
   }
 
@@ -38,6 +66,8 @@
     cart.push(item);
     writeCart(cart);
     updateBadges();
+    // trigger bump locally when an item is added via this API
+    try { bumpCartIcon(); } catch(e){}
   }
 
   // sync across tabs

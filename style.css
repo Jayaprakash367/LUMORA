@@ -978,6 +978,41 @@ p {
   box-shadow: 0 4px 16px rgba(215,30,6,0.18);
 }
 
+/* Inline SVG inside cart anchor: inherit color for easy theming */
+.cart-svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    fill: currentColor;
+}
+
+/* numeric badge on the cart anchor */
+.cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: linear-gradient(135deg, #d71e06, #ff8c3a);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    line-height: 1;
+    min-width: 20px;
+    text-align: center;
+}
+
+.cart-bump {
+    animation: cart-bump 420ms cubic-bezier(.28,.84,.42,1);
+}
+
+@keyframes cart-bump {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
 .lazy {
     opacity: 0;
     transition: opacity 0.3s ease;

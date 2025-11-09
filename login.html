@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUMORA - Login</title>
-    <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="icon" href="perfume.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -15,14 +15,14 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: url('s1UY-unsplash.jpg') no-repeat center center fixed;
+            background: url('s1UY-unsplash.jpg') no-repeat center center;
             background-size: cover;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            overflow: hidden;
+            overflow: auto;
         }
 
         body::before {
@@ -92,16 +92,32 @@
             75% { transform: translateY(-15px) translateX(-10px) scale(1.05); }
         }
 
+        .new-lumora-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .new-lumora-logo img {
+            width: 40px;
+            height: 40px;
+        }
+
         .brand-logo {
             text-align: center;
             margin-bottom: 30px;
         }
-
-        .brand-logo img {
-            width: 60px;
-            height: 60px;
-            filter: brightness(0) invert(1);
-        }
+        .brand-logo .perfume-icon { display:inline-block; }
+        .brand-logo .perfume-icon svg { display:block; width:64px; height:64px; margin:0 auto; }
+        .new-lumora-logo .perfume-icon svg { width:28px; height:28px; }
 
         .brand-title {
             font-size: 3rem;
@@ -327,9 +343,31 @@
         <div class="particle"></div>
     </div>
 
+    <div class="new-lumora-logo">
+        <span class="perfume-icon" aria-hidden="false">
+            <!-- Small red rounded-square with white mark (top-left) -->
+            <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LUMORA">
+                <rect x="0" y="0" width="24" height="24" rx="4" fill="#d71e06" />
+                <rect x="7" y="6" width="10" height="10" rx="2" fill="#ffffff" />
+            </svg>
+        </span>
+        <span style="font-weight:700; color:white; text-shadow:0 2px 4px rgba(0,0,0,0.5);">LUMORA</span>
+    </div>
+
     <div class="login-container">
         <div class="brand-logo">
-            <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="LUMORA">
+            <span class="perfume-icon" aria-hidden="false">
+                <!-- Centered white square with drop shadow and small red badge -->
+                <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LUMORA logo">
+                    <defs>
+                        <filter id="ds2" x="-30%" y="-30%" width="160%" height="160%">
+                            <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#000" flood-opacity="0.25" />
+                        </filter>
+                    </defs>
+                    <rect x="6" y="6" width="52" height="52" rx="8" ry="8" fill="#ffffff" filter="url(#ds2)" />
+                    <rect x="26" y="16" width="12" height="12" rx="3" ry="3" fill="#d71e06" />
+                </svg>
+            </span>
             <h1 class="brand-title">LUMORA</h1>
         </div>
 
@@ -414,6 +452,13 @@
             e.preventDefault();
             alert('Password reset functionality not implemented yet.');
         });
+    </script>
+    <!-- Load cart helper and initialize badge on login page -->
+    <script>
+        (function(){
+            var s = document.createElement('script'); s.src = 'cart.js'; s.onload = function(){ if(window.LUMORA_CART && typeof LUMORA_CART.updateBadges === 'function') LUMORA_CART.updateBadges(); };
+            document.head.appendChild(s);
+        })();
     </script>
 </body>
 </html>
