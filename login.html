@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUMORA - Login</title>
     <link rel="icon" href="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -14,170 +15,114 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: url('s1UY-unsplash.jpg') no-repeat center center fixed;
-            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(255, 20, 147, 0.3));
-            z-index: 1;
+            padding: 20px;
         }
 
         .login-container {
-            position: relative;
-            z-index: 2;
-            background: rgba(255, 255, 255, 0.1);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 450px;
+            background: white;
+            border-radius: 16px;
+            padding: 48px;
+            max-width: 400px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideIn 1s ease-out;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease-out;
         }
 
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateX(-50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
-        }
-
-        .particle-system {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: drift 12s infinite ease-in-out;
-        }
-
-        .particle:nth-child(1) { width: 8px; height: 8px; top: 15%; left: 15%; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 12px; height: 12px; top: 25%; left: 75%; animation-delay: 3s; }
-        .particle:nth-child(3) { width: 6px; height: 6px; top: 65%; left: 25%; animation-delay: 6s; }
-        .particle:nth-child(4) { width: 10px; height: 10px; top: 45%; left: 85%; animation-delay: 9s; }
-        .particle:nth-child(5) { width: 14px; height: 14px; top: 75%; left: 55%; animation-delay: 12s; }
-
-        @keyframes drift {
-            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-            25% { transform: translateY(-15px) translateX(10px) scale(1.1); }
-            50% { transform: translateY(-30px) translateX(-5px) scale(0.9); }
-            75% { transform: translateY(-15px) translateX(-10px) scale(1.05); }
         }
 
         .brand-logo {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
         }
 
         .brand-logo img {
-            width: 60px;
-            height: 60px;
-            filter: brightness(0) invert(1);
+            width: 48px;
+            height: 48px;
+            margin-bottom: 16px;
         }
 
         .brand-title {
-            font-size: 3rem;
+            font-size: 28px;
             font-weight: 700;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            margin-top: 10px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .brand-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 400;
         }
 
         .login-title {
-            font-size: 2rem;
-            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
             text-align: center;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #8a2be2, #ff1493);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 8px;
         }
 
         .login-subtitle {
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            color: #6b7280;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
         }
 
         .form-group {
-            position: relative;
-            margin-bottom: 25px;
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
         }
 
         .form-input {
             width: 100%;
-            padding: 15px 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-        }
-
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            color: #1a1a1a;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            font-family: inherit;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #ff1493;
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 3px rgba(255, 20, 147, 0.3);
-            transform: scale(1.02);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .input-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .input-icon:hover {
-            color: #ff1493;
+        .form-input::placeholder {
+            color: #9ca3af;
         }
 
         .options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .remember-me {
@@ -189,43 +134,43 @@
         .checkbox-input {
             width: 16px;
             height: 16px;
-            accent-color: #ff1493;
+            accent-color: #3b82f6;
         }
 
         .checkbox-label {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            color: #6b7280;
         }
 
         .forgot-password {
-            font-size: 0.9rem;
-            color: #ff1493;
+            font-size: 14px;
+            color: #3b82f6;
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-weight: 500;
         }
 
         .forgot-password:hover {
-            color: #8a2be2;
+            text-decoration: underline;
         }
 
         .login-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #8a2be2, #ff1493);
+            padding: 14px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.3);
+            transition: all 0.2s ease;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(138, 43, 226, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
         }
 
         .login-btn:active {
@@ -234,7 +179,7 @@
 
         .divider {
             text-align: center;
-            margin: 20px 0;
+            margin: 24px 0;
             position: relative;
         }
 
@@ -245,146 +190,124 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: rgba(255, 255, 255, 0.3);
+            background: #e5e7eb;
         }
 
         .divider-text {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0 15px;
-            color: rgba(255, 255, 255, 0.8);
+            background: white;
+            padding: 0 16px;
+            color: #6b7280;
+            font-size: 14px;
             position: relative;
             z-index: 1;
         }
 
         .social-login {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .social-btn {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px;
+            border: 2px solid #e5e7eb;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
+            background: white;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            color: white;
+            transition: all 0.2s ease;
+            font-size: 18px;
+            color: #6b7280;
         }
 
         .social-btn:hover {
-            border-color: #ff1493;
-            background: rgba(255, 20, 147, 0.2);
-            transform: translateY(-2px) scale(1.05);
+            border-color: #d1d5db;
+            background: #f9fafb;
+            transform: translateY(-1px);
         }
 
         .signup-link {
             text-align: center;
-            color: rgba(255, 255, 255, 0.8);
+            color: #6b7280;
+            font-size: 14px;
         }
 
         .signup-link a {
-            color: #ff1493;
+            color: #3b82f6;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+            font-weight: 500;
         }
 
         .signup-link a:hover {
-            color: #8a2be2;
+            text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
+        .perfume-accent {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 50%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        @media (max-width: 640px) {
             .login-container {
-                padding: 30px 20px;
-                max-width: 90%;
+                padding: 32px 24px;
+                margin: 20px;
             }
 
             .brand-title {
-                font-size: 2.5rem;
+                font-size: 24px;
             }
 
             .login-title {
-                font-size: 1.8rem;
+                font-size: 20px;
             }
 
             .social-login {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="particle-system">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+    <div class="perfume-accent"></div>
 
     <div class="login-container">
         <div class="brand-logo">
             <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="LUMORA">
             <h1 class="brand-title">LUMORA</h1>
+            <p class="brand-subtitle">Premium Fragrances</p>
         </div>
 
-        <h2 class="login-title">Welcome Back</h2>
-        <p class="login-subtitle">Sign in to continue your scent journey</p>
+        <h2 class="login-title">Welcome back</h2>
+        <p class="login-subtitle">Sign in to your account</p>
 
         <form id="loginForm">
             <div class="form-group">
-                <input type="text" id="username" name="username" class="form-input" placeholder="Username or Email" required>
-                <i class="fas fa-user input-icon"></i>
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-input" placeholder="Enter username" required>
             </div>
 
             <div class="form-group">
-                <input type="password" id="password" name="password" class="form-input" placeholder="Password" required>
-                <i class="fas fa-eye input-icon" id="togglePassword"></i>
-            </div>
-
-            <div class="options">
-                <div class="remember-me">
-                    <input type="checkbox" id="remember" class="checkbox-input">
-                    <label for="remember" class="checkbox-label">Remember me</label>
-                </div>
-                <a href="#" class="forgot-password">Forgot Password?</a>
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-input" placeholder="Enter password" required>
             </div>
 
             <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
         </form>
 
-        <div class="divider">
-            <span class="divider-text">Or continue with</span>
-        </div>
-
-        <div class="social-login">
-            <button class="social-btn google" title="Sign in with Google"><i class="fab fa-google"></i></button>
-            <button class="social-btn facebook" title="Sign in with Facebook"><i class="fab fa-facebook-f"></i></button>
-            <button class="social-btn twitter" title="Sign in with Twitter"><i class="fab fa-twitter"></i></button>
-        </div>
-
         <div class="signup-link">
-            <p>Don't have an account? <a href="sign.html">Sign Up</a></p>
+            <p>Don't have an account? <a href="sign.html">Sign up</a></p>
         </div>
     </div>
 
     <script>
-        // Password visibility toggle
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            this.classList.toggle('fa-eye');
-            this.classList.toggle('fa-eye-slash');
-        });
-
         // Form submission
         const loginForm = document.getElementById('loginForm');
         const loginBtn = document.getElementById('loginBtn');
@@ -395,8 +318,17 @@
             loginBtn.textContent = 'Signing In...';
 
             setTimeout(() => {
+                const username = document.getElementById('username').value.trim();
+                const userProfile = {
+                    username,
+                    lastLogin: new Date().toISOString()
+                };
+
                 sessionStorage.setItem('isLoggedIn', 'true');
-                sessionStorage.setItem('userName', document.getElementById('username').value);
+                sessionStorage.setItem('userName', username);
+                sessionStorage.setItem('userProfile', JSON.stringify(userProfile));
+                localStorage.setItem('lumora_savedUser', JSON.stringify(userProfile));
+
                 alert('Login successful!');
                 window.location.href = 'main.html';
             }, 2000);

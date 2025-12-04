@@ -398,7 +398,7 @@
 
         .modal-add-to-cart:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(215, 30, 6, 0.4);
+            box-shadow: 0 12px 30px rgba(255, 34, 5, 0.4);
         }
 
         .modal-view-details {
@@ -510,8 +510,8 @@
             <p><a href="main.html#contact-us"><i>Contact Us</i></a></p>
         </div>
         <div class="navbar-actions">
-          <a href="sign.html"><button class="nav-btn">Sign Up</button></a>
-            <a href="login.html"><button class="nav-btn" >Login</button></a>
+          <a href="sign.html" class="auth-btn-link"><button class="auth-btn signup-btn"><i class="fas fa-user-plus"></i><span>Sign Up</span></button></a>
+            <a href="login.html" class="auth-btn-link"><button class="auth-btn login-btn"><i class="fas fa-sign-in-alt"></i><span>Login</span></button></a>
         </div>
 
     </nav>
@@ -670,6 +670,7 @@
                     <div class="card-media" role="button" tabindex="0" aria-label="Open ${escapeHtml(product.name)}">
                         <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy">
                         <div class="card-overlay">
+                            <div class="overlay-price">₹${product.price}</div>
                             <div class="overlay-actions">
                                 <button class="overlay-btn add-cart" data-id="${product.id}">Buy Now &rarr;</button>
                             </div>
@@ -677,8 +678,8 @@
                     </div>
                 `;
 
-                // image click disabled to avoid interfering with Buy Now
-                // card.querySelector('.card-media').addEventListener('click', () => openProductModal(product.id));
+                // click on image area opens modal
+                card.querySelector('.card-media').addEventListener('click', () => openProductModal(product.id));
 
                 grid.appendChild(card);
             });
@@ -732,6 +733,67 @@
                     }
                 }, 300);
             }, 2500);
+        }
+
+        // Product Modal Functions
+        function openProductModal(productId) {
+            const product = productsData.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalName').textContent = product.name;
+            document.getElementById('modalPrice').textContent = `₹${product.price}`;
+            document.getElementById('modalOriginalPrice').textContent = `₹${product.originalPrice}`;
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalCategory').textContent = product.category;
+            document.getElementById('modalRating').textContent = `(250+ Reviews)`;
+            document.getElementById('modalPerfectFor').textContent = product.perfectFor;
+            document.getElementById('modalTopNotes').textContent = product.topNotes;
+            document.getElementById('modalHeartNotes').textContent = product.heartNotes;
+            document.getElementById('modalBaseNotes').textContent = product.baseNotes;
+
+            const modal = document.getElementById('productModal');
+            modal.classList.add('active');
+
+            // Handle modal add to cart
+            document.getElementById('modalAddToCart').onclick = () => {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push({ id: product.id, name: product.name, price: product.price, image: product.image });
+                localStorage.setItem('cart', JSON.stringify(cart));
+                showNotification(`${product.name} added to cart!`, 'success');
+                setTimeout(() => {
+                    closeProductModal();
+                    window.location.href = 'cart.html';
+                }, 1200);
+            };
+
+            // Handle view details
+            document.getElementById('modalViewDetails').onclick = () => {
+                window.location.href = `product-inspect.html?id=${product.id}`;
+            };
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('active');
+        }
+
+        function openFullscreenImage() {
+            const modalImage = document.getElementById('modalImage').src;
+            const productName = document.getElementById('modalName').textContent;
+            const productPrice = document.getElementById('modalPrice').textContent;
+
+            document.getElementById('fullscreenImage').src = modalImage;
+            document.getElementById('fullscreenProductName').textContent = productName;
+            document.getElementById('fullscreenProductPrice').textContent = productPrice;
+
+            const fullscreenModal = document.getElementById('fullscreenModal');
+            fullscreenModal.classList.add('active');
+        }
+
+        function closeFullscreenImage() {
+            const fullscreenModal = document.getElementById('fullscreenModal');
+            fullscreenModal.classList.remove('active');
         }
 
         // render when DOM ready

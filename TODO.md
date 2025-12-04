@@ -1,10 +1,10 @@
 # TODO: Redesign Sign-in and Login Pages
 
 ## Overview
-Redesign sign.html and login.html with a unique, sophisticated perfume-themed design. Make it visually complex, fully responsive for mobile/PC, and include tappable elements. Differ from current split-layout.
+Completely redesign sign.html and login.html with a modern, professional website design. Focus on clean layouts, minimalism, professional typography, subtle animations, and responsive design. Maintain perfume theme subtly while emphasizing professionalism.
 
 ## Steps
-- [x] Redesign sign.html: Full-page perfume background, centered glassmorphism form, floating animations, perfume icons, password strength, social logins, responsive grid.
-- [x] Redesign login.html: Similar background with different scent image, centered card with hover effects, password toggle, social buttons, particle animations.
-- [x] Ensure responsiveness: Media queries for mobile stacking, touch-friendly buttons, font adjustments.
-- [x] Test: Launch browser to verify on different screen sizes.
+- [ ] Redesign sign.html: Modern clean layout with professional form styling, subtle perfume accents, improved typography, and smooth animations.
+- [ ] Redesign login.html: Similar modern design with differentiation, professional card layout, and enhanced user experience.
+- [ ] Ensure responsiveness: Modern grid system, mobile-first approach, touch-friendly elements.
+- [ ] Test: Launch browser to verify functionality and appearance across devices.

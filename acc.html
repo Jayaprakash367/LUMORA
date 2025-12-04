@@ -194,10 +194,25 @@
             const logoutButton = document.getElementById('logoutButton');
             if (logoutButton) {
                 logoutButton.addEventListener('click', function() {
-                    // Clear the login flag from sessionStorage
-                    sessionStorage.removeItem('isLoggedIn');
-                    // Redirect to the login page or home page
-                    window.location.href = 'login.html'; // Or 'main.html' if you want them to see the logged-out state
+                        const storedProfile = sessionStorage.getItem('userProfile');
+                        const profile = storedProfile ? JSON.parse(storedProfile) : null;
+                        const username = sessionStorage.getItem('userName') || profile?.username || '';
+
+                        const savedProfile = {
+                            ...profile,
+                            username,
+                            lastLogout: new Date().toISOString()
+                        };
+
+                        localStorage.setItem('lumora_savedUser', JSON.stringify(savedProfile));
+
+                        // Clear the login flag from sessionStorage
+                        sessionStorage.removeItem('isLoggedIn');
+                        sessionStorage.removeItem('userProfile');
+                        sessionStorage.removeItem('userName');
+
+                        // Redirect to the login page or home page
+                        window.location.href = 'login.html'; // Or 'main.html' if you want them to see the logged-out state
                 });
             }
 
