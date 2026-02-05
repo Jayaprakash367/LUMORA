@@ -1,0 +1,488 @@
+/* 
+ * LUMORA - Mobile & Apple-Inspired Design
+ * Features: Water-style animations, Glassmorphism, Smooth transitions
+ */
+
+/* Enhanced Mobile-First Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(215, 30, 6, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(215, 30, 6, 0.5);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Mobile Navigation Enhancements */
+@media (max-width: 768px) {
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .navbar-actions {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        display: none !important;
+    }
+
+    .navbar-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .navbar-menu-toggle:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Side Navigation with Water Animation */
+@media (max-width: 768px) {
+    .side-navbar {
+        animation: slideInDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .side-navbar.open {
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+    }
+
+    .side-navbar-links a {
+        display: block;
+        padding: 12px 16px;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        animation: slideInRight 0.5s ease-out backwards;
+    }
+
+    .side-navbar-links a:nth-child(1) { animation-delay: 0.1s; }
+    .side-navbar-links a:nth-child(2) { animation-delay: 0.2s; }
+    .side-navbar-links a:nth-child(3) { animation-delay: 0.3s; }
+    .side-navbar-links a:nth-child(4) { animation-delay: 0.4s; }
+
+    .side-navbar-links a:hover {
+        background: rgba(215, 30, 6, 0.1);
+        transform: translateX(8px);
+        padding-left: 24px;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Product Cards - Enhanced */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .product-card {
+        border-radius: 16px;
+    }
+
+    .product-card:active {
+        transform: scale(0.98);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .shop-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        bottom: 8px;
+    }
+
+    .product-card {
+        border-radius: 14px;
+    }
+}
+
+/* Mobile Text Responsiveness */
+@media (max-width: 480px) {
+    body {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin: 12px 0;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    h4 {
+        font-size: 15px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+/* Mobile Footer */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .payment-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .copyright {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 20px 12px;
+    }
+
+    .payment-icons img {
+        height: 24px;
+    }
+
+    .social-icons a {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        margin-left: 8px;
+    }
+}
+
+/* Touch-Friendly Buttons for Mobile */
+@media (max-width: 768px) {
+    button,
+    a[role="button"],
+    .auth-btn,
+    .shop-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Mobile Service Section */
+@media (max-width: 768px) {
+    .service-content-2 {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .service-content-2 div {
+        min-width: unset;
+        padding: 16px;
+    }
+
+    .service-content-2 div i {
+        font-size: 32px;
+    }
+
+    .service-content-2 div h4 {
+        font-size: 15px;
+    }
+
+    .service-content-2 div p {
+        font-size: 13px;
+    }
+}
+
+/* Enhanced Header Slider for Mobile */
+@media (max-width: 768px) {
+    .header-slider {
+        height: 320px;
+    }
+
+    .slider-caption h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .slider-caption p {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .header-button {
+        padding: 11px 20px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-slider {
+        height: 240px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .slider-caption h1 {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .slider-caption p {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .header-button {
+        padding: 9px 16px;
+        font-size: 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile 'Why Choose' Section */
+@media (max-width: 768px) {
+    .why-choose {
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .why-choose div {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .why-choose {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+        padding: 0 8px;
+    }
+
+    .why-choose div {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Smooth Scroll Behavior */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    * {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Apple-like Loading Indicator */
+.loading {
+    animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.loading::after {
+    content: '';
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    background-size: 1000px 100%;
+}
+
+/* Notification Toast Mobile */
+@media (max-width: 480px) {
+    .notification {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+}
+
+/* Safe Area Support for Notches */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+
+    @media (max-width: 480px) {
+        .navbar {
+            padding-left: max(12px, env(safe-area-inset-left));
+            padding-right: max(12px, env(safe-area-inset-right));
+            padding-top: max(12px, env(safe-area-inset-top));
+        }
+    }
+}
+
+/* Tap Highlight for Mobile */
+@media (max-width: 768px) {
+    a,
+    button,
+    [role="button"] {
+        -webkit-tap-highlight-color: rgba(215, 30, 6, 0.1);
+    }
+}
+
+/* Scrollbar Styling for Webkit Browsers */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #d71e06, #ff8c3a);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ff8c3a, #d71e06);
+    box-shadow: 0 0 8px rgba(215, 30, 6, 0.3);
+}
+
+/* Dark Mode Support (Optional) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #f0f0f0;
+    }
+
+    .section-title {
+        color: #ffffff;
+    }
+
+    p {
+        color: #d0d0d0;
+    }
+
+    .footer {
+        background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+        color: #b0b0b0;
+    }
+}
+
+/* Utility Classes for Mobile */
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
+}
+
+/* Gesture Support */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch devices */
+    .product-card:active {
+        transform: scale(0.98);
+    }
+
+    button:active {
+        opacity: 0.8;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .navbar-menu-toggle,
+    .side-navbar,
+    .auth-btn-link {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+}
