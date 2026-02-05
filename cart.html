@@ -72,7 +72,7 @@
 
         .cart-details p {
             font-size: 16px;
-            color: #555;
+            color: #1a1a1a;
         }
 
         .checkout-btn {
@@ -205,7 +205,7 @@
         .footer-section button {
             padding: 10px;
             background-color: #fff;
-            color: #000;
+            color: #1a1a1a;
             border: none;
             border-radius: 0 4px 4px 0;
             cursor: pointer;
@@ -266,7 +266,7 @@
 <body>
     <div class="cart-container">
         <div class="back-button-container">
-            <a href="main.html" class="back-button">← Back</a>
+            <a href="index.html" class="back-button">← Back</a>
         </div>
         <h1>Your Cart</h1>
         <div id="cart-items">
@@ -437,6 +437,7 @@
     totalDiv.style.textAlign = "center";
     totalDiv.style.fontSize = "18px";
     totalDiv.style.marginTop = "20px";
+    totalDiv.style.color = "#000";
     totalDiv.innerHTML = `<strong>Total: ₹${total}</strong>`;
     cartContainer.appendChild(totalDiv);
 

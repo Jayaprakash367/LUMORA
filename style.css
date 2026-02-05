@@ -4,9 +4,14 @@
     box-sizing: border-box;
 }
 
+html {
+    background-color: #ffffff !important;
+}
+
 body {
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+    background-color: #ffffff !important;
+    background: #ffffff !important;
     padding: 0 0 40px 0;
     font-size: 16px;
     min-height: 100vh;
