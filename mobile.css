@@ -297,7 +297,11 @@ p, span, div, a {
     }
 
     .nav-links a {
-        color: #1a1a1a !important;
+        color: #fff !important;
+    }
+
+    .nav-links p {
+        color: #fff !important;
     }
 
     .navbar-menu-toggle {
@@ -424,6 +428,7 @@ p, span, div, a {
 
     .product-card:active {
         transform: scale(0.98);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
     }
 }
 
@@ -694,6 +699,10 @@ p, span, div, a {
         border-radius: 20px;
     }
 
+    .auth-btn span {
+        color: #fff !important;
+    }
+
     .signup-btn {
         background: linear-gradient(135deg, #d71e06, #ff8c3a);
     }
@@ -701,6 +710,10 @@ p, span, div, a {
     .login-btn {
         background: transparent;
         border: 2px solid #fff;
+        color: #fff !important;
+    }
+
+    .login-btn span {
         color: #fff !important;
     }
 }
@@ -711,12 +724,20 @@ p, span, div, a {
         font-size: 13px;
         color: #fff !important;
     }
+
+    .auth-btn span {
+        color: #fff !important;
+    }
 }
 
 @media (min-width: 769px) {
     .auth-btn {
         padding: 12px 24px;
         font-size: 14px;
+        color: #fff !important;
+    }
+
+    .auth-btn span {
         color: #fff !important;
     }
 }
