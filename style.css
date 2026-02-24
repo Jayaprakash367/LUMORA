@@ -1668,11 +1668,11 @@ p {
 }
 
 .product-card:hover .overlay-price {
-    display: none;
+    display: block;
 }
 
 .product-card:hover .overlay-actions {
-    display: none;
+    display: flex;
 }
 
 .product-card:hover .overlay-title {
