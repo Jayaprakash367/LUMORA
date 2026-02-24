@@ -115,7 +115,7 @@ p, span, div, a {
 }
 
 /* Small Devices (481px - 768px) */
-@media (481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
     body {
         font-size: 16px;
         line-height: 1.6;
@@ -887,7 +887,7 @@ p, span, div, a {
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .header-slider {
-        height: 350px;
+        height: 300px;
     }
 
     .slider-caption h1 {

@@ -127,7 +127,7 @@ a:hover {
     }
 }
 .navbar {
-    background: linear-gradient(135deg, #343955 0%, #2d3142 100%);
+    background: linear-gradient(135deg, #5a6a8a 0%, #505080 100%);
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -259,7 +259,7 @@ a:hover {
 }
 /* side nav */
 .side-navbar {
-    background: linear-gradient(135deg, #1d2321 0%, #0a0f0d 100%);
+    background: linear-gradient(135deg, #4a5a45 0%, #3a4a35 100%);
     width: 100vw;
     height: 0;
     overflow: hidden;

@@ -121,15 +121,24 @@ function showMessage(message, isSuccess = false) {
     }, 3000);
 }
 
-// Global functions for side navbar (kept as is, but ensure these are called correctly from HTML if not part of DOMContentLoaded)
-// Note: Your main.html calls shownav() directly from onclick.
+// Global functions for side navbar
 function shownav() {
-    document.querySelector('.side-navbar').classList.add('open'); // Use classList.add to open
+    document.querySelector('.side-navbar').classList.add('open');
 }
 
-function closenav() { // This function is not directly used in your main.html's side-navbar-exit onclick.
-    document.querySelector('.side-navbar').classList.remove('open'); // Use classList.remove to close
+function closenav() {
+    document.querySelector('.side-navbar').classList.remove('open');
 }
+
+// Close side navbar when any link is clicked
+document.addEventListener('DOMContentLoaded', function() {
+    const sideNavLinks = document.querySelectorAll('.side-navbar-links a');
+    sideNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.side-navbar').classList.remove('open');
+        });
+    });
+});
 
 // The toggleSearch function was in your index.js, keeping it if intended.
 function toggleSearch() {
