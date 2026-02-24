@@ -404,7 +404,7 @@ p, span, div, a {
     }
 }
 
-@media (481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
@@ -549,7 +549,7 @@ p, span, div, a {
     }
 }
 
-@media (481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
     .footer {
         padding: 24px 16px;
     }
@@ -718,7 +718,7 @@ p, span, div, a {
     }
 }
 
-@media (481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
     .auth-btn {
         padding: 10px 18px;
         font-size: 13px;
@@ -789,7 +789,7 @@ p, span, div, a {
     }
 }
 
-@media (481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
     .service-content {
         gap: 12px;
     }
@@ -860,7 +860,7 @@ p, span, div, a {
     }
 }
 
-@media (481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
     .header-slider {
         height: 320px;
     }
@@ -945,7 +945,7 @@ p, span, div, a {
     }
 }
 
-@media (481px) and (max-width: 768px) {
+@media (min-width: 481px) and (max-width: 768px) {
     .why-choose {
         gap: 12px;
         margin-bottom: 24px;

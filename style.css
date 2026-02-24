@@ -134,8 +134,8 @@ a:hover {
     align-items: center;
     padding: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -161,14 +161,13 @@ a:hover {
     justify-content: center;
     font-size: 40px;
     font-family: "Candal", sans-serif;
-     background: linear-gradient(90deg, #d71e06, #ffb347, #1e90ff, #d71e06);
+    background: linear-gradient(90deg, #d71e06, #ffb347, #1e90ff, #d71e06);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-     color: transparent;
-    -webkit-text-fill-color: transparent;
-    animation: colorMove 1.2s linear infinite;
     background-clip: text;
+    color: transparent;
+    animation: colorMove 1.2s linear infinite;
     margin: 0;
     padding: 0;
 }
@@ -191,8 +190,20 @@ a:hover {
     align-items: center;
 }
 
+.perfume-img {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+}
+
 .navbar-icon {
     width: 32px;
+    vertical-align: middle;
+}
+
+.cart-img {
+    width: 30px;
+    height: 30px;
     vertical-align: middle;
 }
 .nav-links {
@@ -241,10 +252,10 @@ a:hover {
 .nav-links a:hover {
     background: linear-gradient(90deg, #d71e06, #ffb347, #1e90ff, #d71e06);
     background-size: 200% 200%;
-    background-clip: text;
     -webkit-background-clip: text;
-    color: transparent;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
     animation: colorMove 1.2s linear infinite;
     text-decoration: none;
 }
@@ -272,8 +283,8 @@ a:hover {
     border-bottom-left-radius: 28px;
     border-bottom-right-radius: 28px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
 }
 
 .side-navbar.open {
@@ -305,6 +316,11 @@ a:hover {
     cursor: pointer;
 }
 
+#side-profile-link,
+.side-profile-link {
+    display: none;
+}
+
 .side-navbar-links p {
     color: #fff !important;
 }
@@ -317,10 +333,10 @@ a:hover {
 .side-navbar p:hover {
     background: linear-gradient(90deg, #d71e06, #ffb347, #1e90ff, #d71e06);
     background-size: 200% 200%;
-    background-clip: text;
     -webkit-background-clip: text;
-    color: transparent;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
     animation: colorMove 1.2s linear infinite;
     text-decoration: none;
 }
@@ -396,6 +412,8 @@ a:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.5);
     animation: smoothSlide 0.6s ease-out forwards;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -708,7 +726,7 @@ a:hover {
     visibility: visible;
     transform: translateY(0);
     transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    border-radius: 18px; /* Match image container */
+    border-radius: 18px;
     z-index: 50;
     pointer-events: auto;
 }
@@ -729,8 +747,8 @@ a:hover {
     border-radius: 25px;
     border: none;
     box-shadow: 0 6px 18px rgba(215, 30, 6, 0.4);
-    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 }
 
 .overlay-actions {
@@ -748,8 +766,8 @@ a:hover {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-    backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
     pointer-events: auto;
 }
 
@@ -1143,8 +1161,8 @@ p {
     font-weight: 700;
     text-align: left;
     background: linear-gradient(135deg, #1d2321 0%, #343955 100%);
-    background-clip: text;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -1184,8 +1202,8 @@ p {
         color: #fff;
         font-size: 22px;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
     }
 
     .navbar-menu-toggle:hover {
@@ -1624,8 +1642,8 @@ p {
     position: relative;
     margin-right: 16px;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
@@ -1710,6 +1728,16 @@ p {
 
 .notification.success {
     background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.section-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.about-us-title {
+    align-items: center;
 }
 
 .notification.error {

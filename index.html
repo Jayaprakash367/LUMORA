@@ -46,7 +46,7 @@
     <nav class="navbar">
         <h1 class="candal-regular logo-title">
         <span class="perfume-icon">
-        <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" style="width: 32px; vertical-align: middle;">
+        <img src="https://cdn-icons-gif.flaticon.com/19001/19001681.gif" alt="Perfume" class="perfume-img">
         </span> LUMORA
         </h1>
         <div class="nav-links">
@@ -56,8 +56,8 @@
             <p><a href="#contact-us"><i>Contact us</i></a></p>
         </div>
         <div class="navbar-actions">
-            <a href="products.html" id="cart-icon-link" class="cart-icon">
-            <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" style="width:30px;height:30px;vertical-align:center;">
+            <a href="products.html" id="cart-icon-link" class="cart-icon" title="Shopping Cart">
+            <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" class="cart-img">
             </a>
             <!-- Enhanced auth buttons with modern design -->
             <a href="sign.html" id="signup-btn-link" class="auth-btn-link">
@@ -74,13 +74,13 @@
             </a>
             <!-- Profile button will be dynamically added here by JavaScript -->
         </div>
-        <button class="navbar-menu-toggle" onclick="shownav()" type="button">
+        <button class="navbar-menu-toggle" onclick="shownav()" type="button" title="Toggle Menu" aria-label="Toggle navigation menu">
             <i class="fa-solid fa-bars"></i>
         </button>
     </nav>
     <!-- sidenavbar -->
     <div class="side-navbar">
-        <span class="side-navbar-exit" onclick="closenav()" style="cursor:pointer;">
+        <span class="side-navbar-exit" onclick="closenav()" role="button" tabindex="0" title="Close Menu" aria-label="Close navigation menu">
             <i class="fa-solid fa-circle-xmark"></i>
         </span>
         <p>contact us</p>
@@ -90,7 +90,7 @@
             <a href="#about-us">About Us</a>
             <a href="#contact-us">Contact Us</a>
             <!-- Add profile link to side navbar if needed, will be handled by JS -->
-            <a href="acc.html" id="side-profile-link" style="display: none;">Profile</a>
+            <a href="acc.html" id="side-profile-link" class="side-profile-link">Profile</a>
         </div>
     </div>
     <!-- header -->
@@ -177,13 +177,13 @@
                 </div>
             </div>
         </section></div>
-        <div style="display: flex; justify-content: center; margin: 40px 0;">
+        <div class="section-button-wrapper">
             <a href="products.html">
                 <button class="button">See More Products</button>
             </a>
         </div>
         <hr>
-        <h1 id="about-us" style="align-items: center;">About us</h1>
+        <h1 id="about-us" class="about-us-title">About us</h1>
         <p>Welcome to lumora, where innovation meets dedication. We are a dynamic team of professionals driven by the
             mission to provide exceptional services and forward-thinking solutions that empower our clients to succeed
             in a competitive world
@@ -218,13 +218,13 @@
                 <div class="footer-section">
                     <h4>Subscribe</h4>
                     <p>Enter your email below to be the first to know about new collections and product launches.</p>
-                    <form>
-                        <input type="email" placeholder="Enter your email">
-                        <button type="submit">→</button>
-                    </form>
+        <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button type="submit" class="newsletter-btn">→</button>
+                </div>
                     <div class="social-icons">
-                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" title="Facebook" aria-label="Follow us on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram" aria-label="Follow us on Instagram"><i class="fa-brands fa-instagram"></i></a>
                     </div>
                 </div>
 
@@ -259,11 +259,11 @@
     </div>
     
     <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#" title="Facebook" aria-label="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" title="Instagram" aria-label="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" title="Twitter" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" title="LinkedIn" aria-label="Follow us on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" title="YouTube" aria-label="Follow us on YouTube"><i class="fab fa-youtube"></i></a>
     </div>
   </div>
 </footer>

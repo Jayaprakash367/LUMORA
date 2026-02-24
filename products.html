@@ -495,6 +495,21 @@
         .notification.warning {
             background: #ffc107;
         }
+
+        .modal-spec-wide {
+            grid-column: span 2;
+        }
+
+        .all-products-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .side-navbar-exit {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -518,7 +533,7 @@
     </nav>
     <!-- sidenavbar -->
     <div class="side-navbar">
-        <p style="text-align: right;" onclick="closenav()"> <i class="fa-solid fa-circle-xmark"></i></p>
+        <p class="side-navbar-exit" onclick="closenav()" role="button" tabindex="0" title="Close navigation"> <i class="fa-solid fa-circle-xmark"></i></p>
         <div class="side-navbar-links">
             <p class="side-navbar-links"><a href="index.html">home</a></p>
             <p class="side-navbar-links"><a href="products.html">products</a></p>
@@ -597,15 +612,15 @@
                         <div class="modal-spec-label">Perfect For</div>
                         <div class="modal-spec-value" id="modalPerfectFor">All Seasons</div>
                     </div>
-                    <div class="modal-spec" style="grid-column: span 2;">
+                    <div class="modal-spec modal-spec-wide">
                         <div class="modal-spec-label">Top Notes</div>
                         <div class="modal-spec-value" id="modalTopNotes">Citrus, Bergamot</div>
                     </div>
-                    <div class="modal-spec" style="grid-column: span 2;">
+                    <div class="modal-spec modal-spec-wide">
                         <div class="modal-spec-label">Heart Notes</div>
                         <div class="modal-spec-value" id="modalHeartNotes">Floral, Rose</div>
                     </div>
-                    <div class="modal-spec" style="grid-column: span 2;">
+                    <div class="modal-spec modal-spec-wide">
                         <div class="modal-spec-label">Base Notes</div>
                         <div class="modal-spec-value" id="modalBaseNotes">Musk, Sandalwood</div>
                     </div>
@@ -644,7 +659,7 @@
             <div id="productGrid" class="product-grid" aria-live="polite"></div>
         </section>
     </div>
-        <div style="display: flex; justify-content: center; gap: 20px; margin: 40px 0;">
+    <div class="all-products-actions">
     <a href="main.html#about-us">
         <button class="button">About Us</button>
     </a>
