@@ -239,11 +239,6 @@ body {
     .navbar-menu-toggle:active {
         transform: scale(0.95);
     }
-
-    .navbar-menu-toggle p {
-        margin: 0;
-        padding: 0;
-    }
 }
 
 /* ========== SIDE NAVBAR MOBILE ========== */

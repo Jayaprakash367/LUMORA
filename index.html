@@ -74,13 +74,13 @@
             </a>
             <!-- Profile button will be dynamically added here by JavaScript -->
         </div>
-        <div class="navbar-menu-toggle">
-            <p onclick="shownav()"><i class="fa-solid fa-bars"></i></p>
-        </div>
+        <button class="navbar-menu-toggle" onclick="shownav()" type="button">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     </nav>
     <!-- sidenavbar -->
     <div class="side-navbar">
-        <span class="side-navbar-exit" style="float:right; cursor:pointer;">
+        <span class="side-navbar-exit" onclick="closenav()" style="cursor:pointer;">
             <i class="fa-solid fa-circle-xmark"></i>
         </span>
         <p>contact us</p>

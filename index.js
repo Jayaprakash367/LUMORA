@@ -1,20 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     const sidenav = document.querySelector('.side-navbar');
-    const menuBtn = document.querySelector('.navbar-menu-toggle');
-    const closeBtn = document.querySelector('.side-navbar-exit');
-
-    // Side navigation toggle logic from your existing index.js
-    if (menuBtn && sidenav) {
-        menuBtn.addEventListener('click', () => {
-            sidenav.classList.toggle('open');
-        });
-    }
-
-    if (closeBtn && sidenav) {
-        closeBtn.addEventListener('click', () => {
-            sidenav.classList.remove('open');
-        });
-    }
 
     // Password show/hide toggle logic (only if elements exist on the page)
     const togglePassword = document.getElementById('togglePassword');
@@ -123,11 +108,19 @@ function showMessage(message, isSuccess = false) {
 
 // Global functions for side navbar
 function shownav() {
-    document.querySelector('.side-navbar').classList.add('open');
+    const sidenav = document.querySelector('.side-navbar');
+    if (sidenav) {
+        sidenav.classList.add('open');
+        console.log('Menu opened');
+    }
 }
 
 function closenav() {
-    document.querySelector('.side-navbar').classList.remove('open');
+    const sidenav = document.querySelector('.side-navbar');
+    if (sidenav) {
+        sidenav.classList.remove('open');
+        console.log('Menu closed');
+    }
 }
 
 // Close side navbar when any link is clicked
