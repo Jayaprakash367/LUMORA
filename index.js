@@ -21,31 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
-    // REMOVED: Redundant login form submission logic from index.js
-    // This logic is now solely handled in login.html as per your existing file.
-    // The commented out block below is what was removed from the original index.js.
-    /*
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", function(event) {
-            event.preventDefault();
-            const user = document.getElementById("username").value;
-            const pass = document.getElementById("password").value;
-
-            if (user === validCredentials.username && pass === validCredentials.password) {
-                sessionStorage.setItem('isLoggedIn', 'true');
-                showMessage("Login successful! Redirecting...", true);
-                setTimeout(() => {
-                    window.location.href = "main.html";
-                }, 1500);
-            } else {
-                showMessage("Invalid username or password.");
-            }
-        });
-    }
-    */
-
     // Slider functionality (kept as is)
     const slides = document.querySelectorAll('.slider-img');
     let current = 0;
@@ -56,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
             slides[current].classList.add('active');
         }, 3000);
     }
-
     // Lazy loading for images
     const lazyImages = document.querySelectorAll('img[data-src]');
     const imageObserver = new IntersectionObserver((entries, observer) => {
